@@ -81,6 +81,7 @@ function draw() {
 
   if (keyIsDown(38)) {
     //jumping
+    speed = speed - 4;
   } else if (keyIsDown(37)) {
     characterX1 = characterX1 - 5;
   } else if (keyIsDown(39)) {
@@ -93,6 +94,10 @@ function draw() {
     characterX1 = 0;
   }
 
+  if (characterX1 + 50 > 900) {
+    characterX1 = 900 - 50;
+  }
+
   death();
 
   if (state === "start") {
@@ -103,13 +108,14 @@ function draw() {
     if (characterY1 + 50 > ground) {
       if (
         (characterX1 >= 0 && characterX1 < 400) ||
-        (characterX1 > 600 && characterX1 <= 900)
+        (characterX1 > 550 && characterX1 <= 900)
       ) {
         characterY1 = ground - 50;
         speed = 0;
-      } else if (characterX1 > 400 && characterX1 < 600 && characterY1 > 610) {
+      } else if (characterX1 > 400 && characterX1 < 550 && characterY1 > 610) {
         deathCount = deathCount + 1;
-        character(characterX1, characterY1);
+        characterX1 = 100;
+        characterY1 = 450;
       }
     }
   }
