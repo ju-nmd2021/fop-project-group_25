@@ -7,6 +7,7 @@ const gravity = 1;
 let characterX1 = 100;
 let characterY1 = 450;
 let deathCount = 0;
+let jumpY = 0;
 
 //start screen
 function newGame(x, y, w, h) {
@@ -48,6 +49,16 @@ function death() {
   text("Deaths: " + deathCount, 60, 65, 100, 50);
 }
 
+//jump count
+function jump() {
+  fill(231, 231, 231);
+  rect(250, 50, 100, 50);
+  fill(0, 0, 255);
+  textSize(20);
+  textFont("Impact");
+  text("jumpY: " + jumpY, 260, 65, 100, 50);
+}
+
 //level1
 
 function level1() {
@@ -81,7 +92,14 @@ function draw() {
 
   if (keyIsDown(38)) {
     //jumping
-    speed = speed - 4;
+    speed = speed - 8;
+    jumpY = jumpY + 1;
+    if (jumpY > 3) {
+      speed = 0;
+    }
+    if (characterY1 + 50 === ground) {
+      jumpY = 0;
+    }
   } else if (keyIsDown(37)) {
     characterX1 = characterX1 - 5;
   } else if (keyIsDown(39)) {
@@ -99,6 +117,7 @@ function draw() {
   }
 
   death();
+  jump();
 
   if (state === "start") {
     newGame(350, 250, 200, 100);
