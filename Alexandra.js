@@ -49,16 +49,6 @@ function death() {
   text("Deaths: " + deathCount, 60, 65, 100, 50);
 }
 
-//jump count
-function jump() {
-  fill(231, 231, 231);
-  rect(250, 50, 100, 50);
-  fill(0, 0, 255);
-  textSize(20);
-  textFont("Impact");
-  text("jumpY: " + jumpY, 260, 65, 100, 50);
-}
-
 //level1
 
 function level1() {
@@ -105,30 +95,39 @@ function draw() {
   speed = speed + gravity;
   characterY1 = characterY1 + speed;
 
-  if (characterX1 < 0) {
-    characterX1 = 0;
-  }
-
-  if (characterX1 + 50 > 900) {
-    characterX1 = 900 - 50;
-  }
-
   death();
-  jump();
 
   if (state === "start") {
     newGame(350, 250, 200, 100);
   } else if (state === "level1") {
     level1(0, 0);
 
-    if (characterY1 + 50 > ground) {
+    //the caracter stays within the canvas on X axis
+    if (characterX1 < 0) {
+      characterX1 = 0;
+    }
+
+    if (characterX1 + 50 > 900) {
+      characterX1 = 900 - 50;
+    }
+
+    // if(characterX1 > 400 && characterX1 + 50 < 900) {
+    //   if(characterY1 > 500) {
+
+    //   }
+    // }
+
+    //the character doesnt go below the platform level
+    if (characterY1 + 50 >= ground) {
       if (
         (characterX1 >= 0 && characterX1 < 400) ||
         (characterX1 > 550 && characterX1 <= 900)
       ) {
         characterY1 = ground - 50;
         speed = 0;
-      } else if (characterX1 > 400 && characterX1 < 550 && characterY1 > 610) {
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterX1 > 400 && characterX1 < 550 && characterY1 > 600) {
         deathCount = deathCount + 1;
         characterX1 = 100;
         characterY1 = 450;
