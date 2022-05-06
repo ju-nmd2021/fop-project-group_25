@@ -90,13 +90,10 @@ function level1() {
 function draw() {
   clear();
 
-  if (keyIsDown(38)) {
+  if (keyIsDown(38) && characterY1 + 50 === ground) {
     //jumping
-    speed = speed - 8;
-    jumpY = jumpY + 1;
-    if (jumpY > 3) {
-      speed = 0;
-    }
+    speed = -20;
+
     if (characterY1 + 50 === ground) {
       jumpY = 0;
     }
