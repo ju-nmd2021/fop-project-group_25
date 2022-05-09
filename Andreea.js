@@ -1,13 +1,28 @@
-// canva setup 900x600px
-// pixel look for avatar, simple shape
-// size of the characters: 50x50
-// Changing world with space bar
-// When the character fall the level will start again
+//standard function to initialize the canvas (a 900x600 square will be shown)
+function setup() {
+  createCanvas(900, 600);
+  background(0);
+}
 
-push();
-fill(255);
-rect(0, 0, 900, 600);
-pop();
+// platform 1 and platform 2 object (this will be two rectagles on the button of the screen)
+let platformOne = {
+  x: 100,
+  y: 400,
+  w: 250,
+  h: 200,
+};
 
-fill(0);
-rect(50, 50, 50, 50);
+let platformTwo = {
+  x: 550,
+  y: 300,
+  w: 250,
+  h: 300,
+};
+
+function draw() {
+  push();
+  fill(255);
+  rect(platformOne.x, platformOne.y, platformOne.w, platformOne.h);
+  rect(platformTwo.x, platformTwo.y, platformTwo.w, platformTwo.h);
+  pop();
+}
