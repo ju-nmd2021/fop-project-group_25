@@ -1,6 +1,7 @@
 //standard function to initialize the canvas (a 900x600 square will be shown)
 let y;
 let x;
+
 function setup() {
   createCanvas(900, 600);
   background(0);
@@ -27,10 +28,16 @@ let platformTwo = {
 
 let character = {
   x: 100,
-  y: 50,
+  y: 350,
   w: 50,
   h: 50,
 };
+// defining constants for the boundaries of the platforms
+const pltformOneHorizontalLimitLeft = 100;
+const pltformOneHorizontalLimitRight = 350;
+
+const pltformTwoHorizontalLimitLeft = 550;
+const pltformTwoHorizontalLimitRight = 800;
 
 function draw() {
   // platform
@@ -41,8 +48,10 @@ function draw() {
 
   // character
 
-  rect(x + character.x, y + character.y, character.w, character.y);
+  rect(x + character.x, y + character.y, character.w, character.h);
   pop();
+
+  // the character should move right and left
 
   if (keyIsPressed) {
     if (key == "ArrowRight") {
@@ -52,20 +61,7 @@ function draw() {
 
   if (keyIsPressed) {
     if (key == "ArrowLeft") {
-      x = x - 1;
-    }
-  }
-
-  if (keyIsPressed) {
-    if (key == "ArrowUp") {
-      y = y - 1;
+      x = x - 0.5;
     }
   }
 }
-
-// defining constants for the boundaries of the platforms
-const pltformOneHorizontalLimitLeft = 100;
-const pltformOneHorizontalLimitRight = 350;
-
-const pltformTwoHorizontalLimitLeft = 550;
-const pltformTwoHorizontalLimitRight = 800;
