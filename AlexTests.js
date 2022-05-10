@@ -72,6 +72,8 @@ function death() {
 }
 
 //level1
+//level1
+//level1
 
 function level1on() {
   //moon1
@@ -81,8 +83,6 @@ function level1on() {
     rect(0, y, 400, ground);
   }
 
-  moon1(ground);
-
   //moon2
   function moon2(y) {
     noStroke();
@@ -90,6 +90,7 @@ function level1on() {
     rect(600, y, 300, ground);
   }
 
+  moon1(ground);
   moon2(ground);
   theFinalStar(850, 470, 10, 20, 5);
 }
@@ -102,8 +103,6 @@ function level1off() {
     rect(0, y, 400, ground);
   }
 
-  moon1(ground);
-
   //moon2
   function moon2(y) {
     noStroke();
@@ -111,8 +110,41 @@ function level1off() {
     rect(600, y, 300, ground);
   }
 
+  moon1(ground);
   moon2(ground);
   theFinalStar(850, 470, 10, 20, 5);
+}
+
+//level2
+//level2
+//level2
+
+function level2on() {
+  //moon1
+  function moon1(y) {
+    noStroke();
+    fill(209, 133, 237);
+    rect(0, y, 200, ground);
+  }
+
+  //moon2
+  function moon2(y) {
+    noStroke();
+    fill(56, 56, 56);
+    rect(300, y - 100, 200, ground);
+  }
+
+  //moon3
+  function moon3(y) {
+    noStroke();
+    fill(209, 133, 237);
+    rect(600, y - 200, 200, ground);
+  }
+
+  moon1(ground);
+  moon2(ground);
+  moon3(ground);
+  theFinalStar(850, 200, 10, 20, 5);
 }
 
 function theFinalStar(x, y, radius1, radius2, npoints) {
@@ -155,13 +187,39 @@ function draw() {
 
   if (state === "start") {
     newGame(350, 250, 200, 100);
-  } else if (state === "level1on") {
+  }
+
+  //level 11111111111111111111
+  else if (state === "level1on") {
     level1on(0, 0);
     character(characterX1, characterY1);
 
     //the caracter stays within the canvas on X axis
     if (characterX1 < 0) {
       characterX1 = 0;
+    }
+
+    //level complete
+    if (characterX1 + 50 > 830 && characterY1 > 430) {
+      state = "level2on";
+      characterX1 = 100;
+      characterY1 = 300;
+      speed = 0;
+    }
+
+    //the character doesnt go below the platform level ON
+    if (state === "level1on" && characterY1 + 50 >= ground) {
+      if (characterX1 >= 0 && characterX1 < 400) {
+        characterY1 = ground - 50;
+        speed = 0;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterX1 > 400 && characterY1 > 600) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
     }
   } else if (state === "level1off") {
     level1off(0, 0);
@@ -170,35 +228,81 @@ function draw() {
     if (characterX1 + 50 > 900) {
       characterX1 = 900 - 50;
     }
-  }
 
-  //the character doesnt go below the platform level
-  if (state === "level1on" && characterY1 + 50 >= ground) {
-    if (characterX1 >= 0 && characterX1 < 400) {
-      characterY1 = ground - 50;
-      speed = 0;
-    }
-    //death count in case of falling and restart of the character to the start position
-    else if (characterX1 > 400 && characterY1 > 600) {
-      deathCount = deathCount + 1;
+    //level complete
+    if (characterX1 + 50 > 830 && characterY1 > 430) {
+      state = "level2on";
       characterX1 = 100;
       characterY1 = 300;
       speed = 0;
     }
-  }
 
-  //the character doesnt go below the platform level
-  if (state === "level1off" && characterY1 + 50 >= ground) {
-    if (characterX1 > 550 && characterX1 <= 900) {
-      characterY1 = ground - 50;
-      speed = 0;
+    //the character doesnt go below the platform level OFF
+    if (state === "level1off" && characterY1 + 50 >= ground) {
+      if (characterX1 > 550 && characterX1 <= 900) {
+        characterY1 = ground - 50;
+        speed = 0;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterX1 < 550 && characterY1 > 600) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
     }
-    //death count in case of falling and restart of the character to the start position
-    else if (characterX1 < 550 && characterY1 > 600) {
-      deathCount = deathCount + 1;
-      characterX1 = 100;
-      characterY1 = 300;
-      speed = 0;
+
+    //level 222222222222222
+  } else if (state === "level2on") {
+    level2on(0, 0);
+    character(characterX1, characterY1);
+    //the caracter stays within the canvas on X axis
+    if (characterX1 < 0) {
+      characterX1 = 0;
+    }
+
+    //the character doesnt go below the platform level ON
+    if (state === "level2on" && characterY1 + 50 >= ground) {
+      if (characterX1 >= 0 && characterX1 < 400) {
+        characterY1 = ground - 50;
+        speed = 0;
+      } else if (
+        characterX1 > 600 &&
+        characterX1 + 50 > 800 &&
+        characterY1 + 50 >= 300
+      ) {
+        characterY1 = ground - 50;
+        speed = 0;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterX1 > 400 && characterY1 > 600) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
+    }
+  } else if (state === "level2off") {
+    level1off(0, 0);
+    character(characterX1, characterY1);
+
+    if (characterX1 + 50 > 900) {
+      characterX1 = 900 - 50;
+    }
+
+    //the character doesnt go below the platform level OFF
+    if (state === "level1off" && characterY1 + 50 >= ground) {
+      if (characterX1 > 550 && characterX1 <= 900) {
+        characterY1 = ground - 50;
+        speed = 0;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterX1 < 550 && characterY1 > 600) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
     }
   }
 }
