@@ -38,8 +38,30 @@ function newGame(x, y, w, h) {
   text("B", x + 160, y - h / 1.7);
 }
 
-//death count
+//character
+function character(x, y) {
+  fill(247, 162, 99);
+  rect(x, y, 50, 50);
+  fill(255, 255, 255);
+  ellipse(x + 13, y + 20, 20, 20);
+  ellipse(x + 37, y + 20, 20, 20);
+  fill(0, 0, 0);
+  ellipse(x + 13, y + 20, 5, 5);
+  ellipse(x + 37, y + 20, 5, 5);
 
+  //ears
+  fill(247, 162, 99);
+  ellipse(x + 8, y, 15, 15);
+  ellipse(x + 42, y, 15, 15);
+
+  fill(245, 95, 175);
+  beginShape();
+  vertex(x + 20, y + 33);
+  bezierVertex(x + 20, y + 43, x + 30, y + 43, x + 30, y + 33);
+  endShape();
+}
+
+//death count
 function death() {
   fill(231, 231, 231);
   rect(50, 50, 100, 50);
@@ -59,6 +81,8 @@ function level1() {
     rect(0, y, 400, ground);
   }
 
+  moon1(ground);
+
   //moon2
   function moon2(y) {
     noStroke();
@@ -66,24 +90,16 @@ function level1() {
     rect(600, y, 300, ground);
   }
 
-  //character
-  function character(x, y) {
-    fill(255, 255, 0);
-    rect(x, y, 50, 50);
-  }
-
-  moon1(ground);
   moon2(ground);
-  character(characterX1, characterY1);
 }
 
 function draw() {
   clear();
 
+  //basic movement
   if (keyIsDown(38) && characterY1 + 50 === ground) {
     //jumping
     speed = -20;
-
     if (characterY1 + 50 === ground) {
       jumpY = 0;
     }
@@ -92,6 +108,8 @@ function draw() {
   } else if (keyIsDown(39)) {
     characterX1 = characterX1 + 5;
   }
+
+  //gravity
   speed = speed + gravity;
   characterY1 = characterY1 + speed;
 
@@ -101,37 +119,32 @@ function draw() {
     newGame(350, 250, 200, 100);
   } else if (state === "level1") {
     level1(0, 0);
+    character(characterX1, characterY1);
 
     //the caracter stays within the canvas on X axis
     if (characterX1 < 0) {
       characterX1 = 0;
     }
+  }
 
-    if (characterX1 + 50 > 900) {
-      characterX1 = 900 - 50;
+  if (characterX1 + 50 > 900) {
+    characterX1 = 900 - 50;
+  }
+
+  //the character doesnt go below the platform level
+  if (characterY1 + 50 >= ground) {
+    if (
+      (characterX1 >= 0 && characterX1 < 400) ||
+      (characterX1 > 550 && characterX1 <= 900)
+    ) {
+      characterY1 = ground - 50;
+      speed = 0;
     }
-
-    // if(characterX1 > 400 && characterX1 + 50 < 900) {
-    //   if(characterY1 > 500) {
-
-    //   }
-    // }
-
-    //the character doesnt go below the platform level
-    if (characterY1 + 50 >= ground) {
-      if (
-        (characterX1 >= 0 && characterX1 < 400) ||
-        (characterX1 > 550 && characterX1 <= 900)
-      ) {
-        characterY1 = ground - 50;
-        speed = 0;
-      }
-      //death count in case of falling and restart of the character to the start position
-      else if (characterX1 > 400 && characterX1 < 550 && characterY1 > 600) {
-        deathCount = deathCount + 1;
-        characterX1 = 100;
-        characterY1 = 450;
-      }
+    //death count in case of falling and restart of the character to the start position
+    else if (characterX1 > 400 && characterX1 < 550 && characterY1 > 600) {
+      deathCount = deathCount + 1;
+      characterX1 = 100;
+      characterY1 = 450;
     }
   }
 }
