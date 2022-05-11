@@ -32,7 +32,17 @@ let character = {
   w: 50,
   h: 50,
 };
+
+
 // defining constants for the boundaries of the platforms
+
+// this is y
+
+const platformVerticalLimit = 546; 
+
+const platformVerticalLowerLimit = 580; 
+
+// this is x
 const pltformOneHorizontalLimitLeft = 100;
 const pltformOneHorizontalLimitRight = 350;
 
@@ -51,6 +61,10 @@ function draw() {
   rect(x + character.x, y + character.y, character.w, character.h);
   pop();
 
+  pMove();
+}
+
+function pMove() {
   // the character should move right and left
 
   if (keyIsPressed) {
@@ -61,7 +75,8 @@ function draw() {
 
   if (keyIsPressed) {
     if (key == "ArrowLeft") {
-      x = x - 0.5;
+      x = x - 1;
     }
   }
 }
+
