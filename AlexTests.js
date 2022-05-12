@@ -7,7 +7,7 @@ const gravity = 1;
 let characterX1 = 100;
 let characterY1 = 450;
 let deathCount = 0;
-let jumpY = 0;
+let canJump = true;
 
 //start screen
 function newGame(x, y, w, h) {
@@ -61,33 +61,42 @@ function character(x, y) {
   endShape();
 }
 
-//death count
-function death() {
-  fill(231, 231, 231);
-  rect(50, 50, 100, 50);
-  fill(0, 0, 255);
-  textSize(20);
-  textFont("Impact");
-  text("Deaths: " + deathCount, 60, 65, 100, 50);
-}
-
 //level1
 //level1
 //level1
 
 function level1on() {
+  fill(237, 215, 245);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  fill(0, 0, 0);
+  textSize(30);
+  textFont("Helvetica");
+  text("MOVEMENT", 360, 100, 300, 300);
+
+  textSize(20);
+  text(" < go left", 400, 150, 300, 300);
+
+  text(" > go right", 400, 180, 300, 300);
+
+  text(" ^ jump", 400, 210, 300, 300);
+
+  text(" SPACE change worlds", 340, 240, 300, 300);
+
   //moon1
   function moon1(y) {
     noStroke();
     fill(209, 133, 237);
-    rect(0, y, 400, ground);
+    rect(0, y, 400, 100);
   }
 
   //moon2
   function moon2(y) {
     noStroke();
     fill(56, 56, 56);
-    rect(600, y, 300, ground);
+    rect(600, y, 300, 100);
   }
 
   moon1(ground);
@@ -96,18 +105,37 @@ function level1on() {
 }
 
 function level1off() {
+  fill(195, 247, 210);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  fill(0, 0, 0);
+  textSize(30);
+  textFont("Helvetica");
+  text("MOVEMENT", 360, 100, 300, 300);
+
+  textSize(20);
+  text(" < go left", 400, 150, 300, 300);
+
+  text(" > go right", 400, 180, 300, 300);
+
+  text(" ^ jump", 400, 210, 300, 300);
+
+  text(" SPACE change worlds", 340, 240, 300, 300);
+
   //moon1
   function moon1(y) {
     noStroke();
     fill(56, 56, 56);
-    rect(0, y, 400, ground);
+    rect(0, y, 400, 100);
   }
 
   //moon2
   function moon2(y) {
     noStroke();
     fill(99, 235, 137);
-    rect(600, y, 300, ground);
+    rect(600, y, 300, 100);
   }
 
   moon1(ground);
@@ -120,25 +148,63 @@ function level1off() {
 //level2
 
 function level2on() {
+  fill(237, 215, 245);
+  rect(0, 0, 900, 600);
+
+  death();
+
   //moon1
   function moon1(y) {
     noStroke();
     fill(209, 133, 237);
-    rect(0, y, 200, ground);
+    rect(0, y, 200, 100);
   }
 
   //moon2
   function moon2(y) {
     noStroke();
     fill(56, 56, 56);
-    rect(300, y - 100, 200, ground);
+    rect(300, y - 100, 200, 200);
   }
 
   //moon3
   function moon3(y) {
     noStroke();
     fill(209, 133, 237);
-    rect(600, y - 200, 200, ground);
+    rect(600, y - 200, 200, 300);
+  }
+
+  moon1(ground);
+  moon2(ground);
+  moon3(ground);
+  theFinalStar(850, 200, 10, 20, 5);
+}
+
+function level2off() {
+  fill(195, 247, 210);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  //moon1
+  function moon1(y) {
+    noStroke();
+    fill(56, 56, 56);
+    rect(0, y, 200, 100);
+  }
+
+  //moon2
+  function moon2(y) {
+    noStroke();
+    fill(99, 235, 137);
+    rect(300, y - 100, 200, 200);
+  }
+
+  //moon3
+  function moon3(y) {
+    noStroke();
+    fill(56, 56, 56);
+    rect(600, y - 200, 200, 300);
   }
 
   moon1(ground);
@@ -148,7 +214,7 @@ function level2on() {
 }
 
 function theFinalStar(x, y, radius1, radius2, npoints) {
-  fill(200, 200, 200);
+  fill(255, 255, 255);
   let angle = TWO_PI / npoints;
   let halfAngle = angle / 2.0;
   beginShape();
@@ -163,41 +229,48 @@ function theFinalStar(x, y, radius1, radius2, npoints) {
   endShape(CLOSE);
 }
 
+//death count
+function death() {
+  fill(231, 231, 231);
+  rect(50, 50, 100, 50);
+  fill(0, 0, 255);
+  textSize(20);
+  textFont("Impact");
+  text("Deaths: " + deathCount, 60, 65, 100, 50);
+}
+
 function draw() {
   clear();
 
   //basic movement
-  if (keyIsDown(38) && characterY1 + 50 === ground) {
+  if (keyIsDown(38) && canJump) {
     //jumping
     speed = -20;
-    if (characterY1 + 50 === ground) {
-      jumpY = 0;
-    }
+    canJump = false;
   } else if (keyIsDown(37)) {
-    characterX1 = characterX1 - 5;
+    characterX1 = characterX1 - 6;
   } else if (keyIsDown(39)) {
-    characterX1 = characterX1 + 5;
+    characterX1 = characterX1 + 6;
   }
 
   //gravity
   speed = speed + gravity;
   characterY1 = characterY1 + speed;
 
-  death();
+  if (characterX1 < 0) {
+    characterX1 = 0;
+  }
+  if (characterX1 + 50 > 900) {
+    characterX1 = 900 - 50;
+  }
 
   if (state === "start") {
     newGame(350, 250, 200, 100);
   }
-
   //level 11111111111111111111
   else if (state === "level1on") {
     level1on(0, 0);
     character(characterX1, characterY1);
-
-    //the caracter stays within the canvas on X axis
-    if (characterX1 < 0) {
-      characterX1 = 0;
-    }
 
     //level complete
     if (characterX1 + 50 > 830 && characterY1 > 430) {
@@ -211,10 +284,11 @@ function draw() {
     if (state === "level1on" && characterY1 + 50 >= ground) {
       if (characterX1 >= 0 && characterX1 < 400) {
         characterY1 = ground - 50;
+        canJump = true;
         speed = 0;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 > 400 && characterY1 > 600) {
+      else if (characterX1 > 400 && characterY1 > 550) {
         deathCount = deathCount + 1;
         characterX1 = 100;
         characterY1 = 300;
@@ -224,10 +298,6 @@ function draw() {
   } else if (state === "level1off") {
     level1off(0, 0);
     character(characterX1, characterY1);
-
-    if (characterX1 + 50 > 900) {
-      characterX1 = 900 - 50;
-    }
 
     //level complete
     if (characterX1 + 50 > 830 && characterY1 > 430) {
@@ -242,9 +312,10 @@ function draw() {
       if (characterX1 > 550 && characterX1 <= 900) {
         characterY1 = ground - 50;
         speed = 0;
+        canJump = true;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 < 550 && characterY1 > 600) {
+      else if (characterY1 > 550) {
         deathCount = deathCount + 1;
         characterX1 = 100;
         characterY1 = 300;
@@ -256,26 +327,25 @@ function draw() {
   } else if (state === "level2on") {
     level2on(0, 0);
     character(characterX1, characterY1);
-    //the caracter stays within the canvas on X axis
-    if (characterX1 < 0) {
-      characterX1 = 0;
-    }
 
     //the character doesnt go below the platform level ON
-    if (state === "level2on" && characterY1 + 50 >= ground) {
-      if (characterX1 >= 0 && characterX1 < 400) {
+    if (state === "level2on") {
+      if (characterX1 >= 0 && characterX1 < 200 && characterY1 + 50 >= ground) {
         characterY1 = ground - 50;
         speed = 0;
-      } else if (
-        characterX1 > 600 &&
-        characterX1 + 50 > 800 &&
-        characterY1 + 50 >= 300
+        canJump = true;
+      }
+      if (
+        characterX1 > 550 &&
+        characterX1 < 800 &&
+        characterY1 + 250 >= ground
       ) {
-        characterY1 = ground - 50;
+        characterY1 = ground - 250;
         speed = 0;
+        canJump = true;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 > 400 && characterY1 > 600) {
+      else if (characterX1 > 200 && characterY1 > 550) {
         deathCount = deathCount + 1;
         characterX1 = 100;
         characterY1 = 300;
@@ -283,25 +353,24 @@ function draw() {
       }
     }
   } else if (state === "level2off") {
-    level1off(0, 0);
+    level2off(0, 0);
     character(characterX1, characterY1);
 
-    if (characterX1 + 50 > 900) {
-      characterX1 = 900 - 50;
-    }
-
     //the character doesnt go below the platform level OFF
-    if (state === "level1off" && characterY1 + 50 >= ground) {
-      if (characterX1 > 550 && characterX1 <= 900) {
-        characterY1 = ground - 50;
+    if (state === "level2off" && characterY1 + 50 >= ground - 100) {
+      if (characterX1 > 250 && characterX1 <= 500) {
+        characterY1 = ground - 150;
         speed = 0;
+        canJump = true;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 < 550 && characterY1 > 600) {
-        deathCount = deathCount + 1;
-        characterX1 = 100;
-        characterY1 = 300;
-        speed = 0;
+      else if (characterX1 < 250 || characterX1 > 500) {
+        if (characterY1 > 550) {
+          deathCount = deathCount + 1;
+          characterX1 = 100;
+          characterY1 = 300;
+          speed = 0;
+        }
       }
     }
   }
@@ -329,5 +398,9 @@ function keyPressed() {
     state = "level1off";
   } else if (keyCode === 32 && state === "level1off") {
     state = "level1on";
+  } else if (keyCode === 32 && state === "level2on") {
+    state = "level2off";
+  } else if (keyCode === 32 && state === "level2off") {
+    state = "level2on";
   }
 }
