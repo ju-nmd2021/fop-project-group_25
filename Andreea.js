@@ -33,14 +33,13 @@ let character = {
   h: 50,
 };
 
-
 // defining constants for the boundaries of the platforms
 
 // this is y
 
-const platformVerticalLimit = 546; 
+const platformVerticalLimit = 546;
 
-const platformVerticalLowerLimit = 580; 
+const platformVerticalLowerLimit = 580;
 
 // this is x
 const pltformOneHorizontalLimitLeft = 100;
@@ -60,7 +59,6 @@ function draw() {
 
   rect(x + character.x, y + character.y, character.w, character.h);
   pop();
-
   pMove();
 }
 
@@ -79,4 +77,3 @@ function pMove() {
     }
   }
 }
-
