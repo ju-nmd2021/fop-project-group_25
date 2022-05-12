@@ -7,7 +7,6 @@ const gravity = 1;
 let characterX1 = 100;
 let characterY1 = 450;
 let deathCount = 0;
-let jumpY = 0;
 let canJump = true;
 
 //start screen
@@ -248,9 +247,6 @@ function draw() {
     //jumping
     speed = -20;
     canJump = false;
-    if (characterY1 + 50 === ground) {
-      jumpY = 0;
-    }
   } else if (keyIsDown(37)) {
     characterX1 = characterX1 - 6;
   } else if (keyIsDown(39)) {
