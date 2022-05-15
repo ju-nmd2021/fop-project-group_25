@@ -12,6 +12,59 @@ const arrowUp_keycode = 38;
 const arrowLeft_keycode = 37;
 const arrowRight_keycode = 39;
 
+const onLevelBackgroundRed = 237;
+const onLevelBackgroundGreen = 215;
+const onLevelBackgroundBlue = 245;
+
+const offLevelBackgroundRed = 195;
+const offLevelBackgroundGreen = 247;
+const offLevelBackgroundBlue = 210;
+
+const onLevelPlatformRed = 209;
+const onLevelPlatformGreen = 133;
+const onLevelPlatformBlue = 237;
+
+const offLevelPlatformRed = 99;
+const offLevelPlatformGreen = 235;
+const offLevelPlatformBlue = 137;
+
+const disabledPlatformColor = 56;
+
+//defining objects containing the parameters of all the platforms (x,y,width,height)
+const platformOneLvl3 = {
+  x: 100,
+  y: 400,
+  w: 250,
+  h: 200,
+};
+
+const platformTwoLvl3 = {
+  x: 350,
+  y: 300,
+  w: 200,
+  h: 50,
+};
+
+const platformThreeLvl3 = {
+  x: 600,
+  y: 150,
+  w: 150,
+  h: 150,
+};
+
+const starLvl3 = {
+  x: 750,
+  y: 100,
+  radius1: 10,
+  radius2: 20,
+  nPoints: 5,
+};
+
+function setupCanvas(r, g, b) {
+  createCanvas(900, 600);
+  background(r, g, b);
+}
+
 //death count
 function deathCounter() {
   fill(231, 231, 231);
@@ -229,6 +282,102 @@ function level2off() {
   theFinalStar(850, 200, 10, 20, 5);
 }
 
+//////////////////////////////////////////////////////////////////////
+function level3on() {
+  setupCanvas(
+    onLevelBackgroundRed,
+    offLevelBackgroundGreen,
+    offLevelBackgroundBlue
+  );
+
+  deathCounter();
+
+  //actually drawing the platforms
+  noStroke();
+
+  //platformOne
+  fill(onLevelPlatformRed, onLevelPlatformGreen, onLevelPlatformBlue);
+  rect(
+    platformOneLvl3.x,
+    platformOneLvl3.y,
+    platformOneLvl3.w,
+    platformOneLvl3.h
+  );
+
+  //platformThree
+  rect(
+    platformThreeLvl3.x,
+    platformThreeLvl3.y,
+    platformThreeLvl3.w,
+    platformThreeLvl3.h
+  );
+
+  //platformTwo
+  fill(disabledPlatformColor);
+  rect(
+    platformTwoLvl3.x,
+    platformTwoLvl3.y,
+    platformTwoLvl3.w,
+    platformTwoLvl3.h
+  );
+
+  theFinalStar(
+    starLvl3.x,
+    starLvl3.y,
+    starLvl3.radius1,
+    starLvl3.radius2,
+    starLvl3.nPoints
+  );
+}
+
+function level3off() {
+  setupCanvas(
+    offLevelBackgroundRed,
+    offLevelBackgroundGreen,
+    offLevelBackgroundBlue
+  );
+
+  deathCounter();
+
+  //actually drawing the platforms
+  noStroke();
+
+  //platformOne
+  fill(disabledPlatformColor);
+  rect(
+    platformOneLvl3.x,
+    platformOneLvl3.y,
+    platformOneLvl3.w,
+    platformOneLvl3.h
+  );
+
+  //platformThree
+  rect(
+    platformThreeLvl3.x,
+    platformThreeLvl3.y,
+    platformThreeLvl3.w,
+    platformThreeLvl3.h
+  );
+
+  //platformTwo
+  fill(offLevelPlatformRed, offLevelPlatformGreen, offLevelPlatformBlue);
+  rect(
+    platformTwoLvl3.x,
+    platformTwoLvl3.y,
+    platformTwoLvl3.w,
+    platformTwoLvl3.h
+  );
+
+  theFinalStar(
+    starLvl3.x,
+    starLvl3.y,
+    starLvl3.radius1,
+    starLvl3.radius2,
+    starLvl3.nPoints
+  );
+}
+////////////////////////////////////////////////////////
+
 function theFinalStar(x, y, radius1, radius2, npoints) {
   fill(255, 255, 255);
   let angle = TWO_PI / npoints;
@@ -263,6 +412,7 @@ function draw() {
   speed = speed + gravity;
   characterY1 = characterY1 + speed;
 
+  //boundaries
   if (characterX1 < 0) {
     characterX1 = 0;
   }
@@ -275,8 +425,8 @@ function draw() {
   }
   //level 11111111111111111111
   else if (state === "level1on") {
-    level1on();
-    character(characterX1, characterY1);
+    level1on(); //defining the canvas and platforms and stuff
+    character(characterX1, characterY1); //drawing the character
 
     //level complete
     if (characterX1 + 50 > 830 && characterY1 > 430) {
@@ -334,6 +484,16 @@ function draw() {
     level2on(0, 0);
     character(characterX1, characterY1);
 
+    theFinalStar(850, 200, 10, 20, 5);
+
+    //level complete
+    if (characterX1 + 50 > 850 && characterY1 + 50 > 200) {
+      state = "level3on";
+      characterX1 = platformOneLvl3.x + 20;
+      characterY1 = platformOneLvl3.y + 50;
+      speed = 0;
+    }
+
     //the character doesnt go below the platform level ON
     if (state === "level2on") {
       if (characterX1 >= 0 && characterX1 < 200 && characterY1 + 50 >= ground) {
@@ -380,6 +540,83 @@ function draw() {
       }
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  //level 3
+  else if (state === "level3on") {
+    level3on(); //defining the canvas and platforms and stuff
+    character(characterX1, characterY1); //drawing the character
+
+    //level complete
+    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+      state = "level4on";
+      characterX1 = 100;
+      characterY1 = 300;
+      speed = 0;
+    }
+
+    //the character doesnt go below the platform level ON
+
+    //platformOne
+    if (
+      characterX1 > platformOneLvl3.x &&
+      characterX1 < platformOneLvl3.x + platformOneLvl3.w
+    ) {
+      if (characterY1 + 50 > platformOneLvl3.y) {
+        characterY1 = platformOneLvl3.y - 50;
+        canJump = true;
+        speed = 0;
+      }
+    }
+    //platformThree
+    else if (
+      characterX1 > platformThreeLvl3.x &&
+      characterX1 < platformThreeLvl3.x + platformThreeLvl3.w
+    ) {
+      if (characterY1 + 50 > platformThreeLvl3.y) {
+        characterY1 = platformThreeLvl3.y - 50;
+        canJump = true;
+        speed = 0;
+      }
+    }
+    //the rest of the canvas (excepting platformOne and platformThree)
+    else {
+      if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = platformOneLvl3.x + 20;
+        characterY1 = platformOneLvl3.y + 50;
+        speed = 0;
+      }
+    }
+  }
+  ////////////////////////////////////////////////////////////////////////
+  else if (state === "level3off") {
+    level3off(); //defining the canvas and platforms and stuff
+    character(characterX1, characterY1); //drawing the character
+
+    //the character doesnt go below the platform level ON
+
+    //platformTwo
+    if (
+      characterX1 > platformTwoLvl3.x &&
+      characterX1 < platformTwoLvl3.x + platformTwoLvl3.w
+    ) {
+      if (characterY1 + 50 > platformTwoLvl3.y) {
+        characterY1 = platformTwoLvl3.y - 50;
+        canJump = true;
+        speed = 0;
+      }
+    }
+    //the rest of the canvas (excepting platformOne and platformThree)
+    else {
+      if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = platformOneLvl3.x + 20;
+        characterY1 = platformOneLvl3.y - 50;
+        speed = 0;
+      }
+    }
+  }
 }
 
 function mouseClicked() {
@@ -406,5 +643,9 @@ function keyPressed() {
     state = "level2off";
   } else if (keyCode === 32 && state === "level2off") {
     state = "level2on";
+  } else if (keyCode === 32 && state === "level3off") {
+    state = "level3on";
+  } else if (keyCode === 32 && state === "level3on") {
+    state = "level3off";
   }
 }
