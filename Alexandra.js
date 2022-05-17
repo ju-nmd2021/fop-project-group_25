@@ -9,6 +9,40 @@ let characterY1 = 450;
 let deathCount = 0;
 let canJump = true;
 
+//platforms level 11111
+let platforms1on = [{ xPosition: 0, yPosition: 500, width: 400, height: 100 }];
+
+let platforms1off = [
+  { xPosition: 600, yPosition: 500, width: 300, height: 100 },
+];
+
+//platforms level 22222
+let platforms2on = [
+  { xPosition: 0, yPosition: 500, width: 200, height: 100 },
+  { xPosition: 600, yPosition: 300, width: 200, height: 300 },
+];
+
+let platforms2off = [
+  { xPosition: 300, yPosition: 400, width: 200, height: 200 },
+];
+
+//platforms level 44444
+let platforms4on = [
+  { xPosition: 0, yPosition: 200, width: 100, height: 400 },
+
+  { xPosition: 400, yPosition: 400, width: 100, height: 300 },
+
+  { xPosition: 800, yPosition: 400, width: 100, height: 300 },
+];
+
+let platforms4off = [
+  { xPosition: 200, yPosition: 300, width: 100, height: 300 },
+
+  { xPosition: 600, yPosition: 500, width: 100, height: 300 },
+];
+
+noStroke();
+
 //start screen
 function newGame(x, y, w, h) {
   fill(31, 31, 31);
@@ -61,6 +95,22 @@ function character(x, y) {
   endShape();
 }
 
+function startText() {
+  fill(0, 0, 0);
+  textSize(30);
+  textFont("Helvetica");
+  text("MOVEMENT", 360, 100, 300, 300);
+
+  textSize(20);
+  text(" < go left", 400, 150, 300, 300);
+
+  text(" > go right", 400, 180, 300, 300);
+
+  text(" ^ jump", 400, 210, 300, 300);
+
+  text(" SPACE change worlds", 340, 240, 300, 300);
+}
+
 //level1
 //level1
 //level1
@@ -70,37 +120,28 @@ function level1on() {
   rect(0, 0, 900, 600);
 
   death();
+  startText();
 
-  fill(0, 0, 0);
-  textSize(30);
-  textFont("Helvetica");
-  text("MOVEMENT", 360, 100, 300, 300);
-
-  textSize(20);
-  text(" < go left", 400, 150, 300, 300);
-
-  text(" > go right", 400, 180, 300, 300);
-
-  text(" ^ jump", 400, 210, 300, 300);
-
-  text(" SPACE change worlds", 340, 240, 300, 300);
-
-  //moon1
-  function moon1(y) {
-    noStroke();
+  let levelOn = platforms1on;
+  for (let i = 0; i < levelOn.length; i++) {
     fill(209, 133, 237);
-    rect(0, y, 400, 100);
+    rect(
+      levelOn[i].xPosition,
+      levelOn[i].yPosition,
+      levelOn[i].width,
+      levelOn[i].height
+    );
   }
-
-  //moon2
-  function moon2(y) {
-    noStroke();
-    fill(56, 56, 56);
-    rect(600, y, 300, 100);
+  let levelOff = platforms1off;
+  for (let i = 0; i < levelOff.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      levelOff[i].xPosition,
+      levelOff[i].yPosition,
+      levelOff[i].width,
+      levelOff[i].height
+    );
   }
-
-  moon1(ground);
-  moon2(ground);
   theFinalStar(850, 470, 10, 20, 5);
 }
 
@@ -109,37 +150,28 @@ function level1off() {
   rect(0, 0, 900, 600);
 
   death();
+  startText();
 
-  fill(0, 0, 0);
-  textSize(30);
-  textFont("Helvetica");
-  text("MOVEMENT", 360, 100, 300, 300);
-
-  textSize(20);
-  text(" < go left", 400, 150, 300, 300);
-
-  text(" > go right", 400, 180, 300, 300);
-
-  text(" ^ jump", 400, 210, 300, 300);
-
-  text(" SPACE change worlds", 340, 240, 300, 300);
-
-  //moon1
-  function moon1(y) {
-    noStroke();
-    fill(56, 56, 56);
-    rect(0, y, 400, 100);
+  let levelOn = platforms1on;
+  for (let i = 0; i < levelOn.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      levelOn[i].xPosition,
+      levelOn[i].yPosition,
+      levelOn[i].width,
+      levelOn[i].height
+    );
   }
-
-  //moon2
-  function moon2(y) {
-    noStroke();
+  let levelOff = platforms1off;
+  for (let i = 0; i < levelOff.length; i++) {
     fill(99, 235, 137);
-    rect(600, y, 300, 100);
+    rect(
+      levelOff[i].xPosition,
+      levelOff[i].yPosition,
+      levelOff[i].width,
+      levelOff[i].height
+    );
   }
-
-  moon1(ground);
-  moon2(ground);
   theFinalStar(850, 470, 10, 20, 5);
 }
 
@@ -153,30 +185,26 @@ function level2on() {
 
   death();
 
-  //moon1
-  function moon1(y) {
-    noStroke();
+  let level2On = platforms2on;
+  for (let i = 0; i < level2On.length; i++) {
     fill(209, 133, 237);
-    rect(0, y, 200, 100);
+    rect(
+      level2On[i].xPosition,
+      level2On[i].yPosition,
+      level2On[i].width,
+      level2On[i].height
+    );
   }
-
-  //moon2
-  function moon2(y) {
-    noStroke();
-    fill(56, 56, 56);
-    rect(300, y - 100, 200, 200);
+  let level2Off = platforms2off;
+  for (let i = 0; i < level2Off.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      level2Off[i].xPosition,
+      level2Off[i].yPosition,
+      level2Off[i].width,
+      level2Off[i].height
+    );
   }
-
-  //moon3
-  function moon3(y) {
-    noStroke();
-    fill(209, 133, 237);
-    rect(600, y - 200, 200, 300);
-  }
-
-  moon1(ground);
-  moon2(ground);
-  moon3(ground);
   theFinalStar(850, 200, 10, 20, 5);
 }
 
@@ -186,30 +214,88 @@ function level2off() {
 
   death();
 
-  //moon1
-  function moon1(y) {
-    noStroke();
-    fill(56, 56, 56);
-    rect(0, y, 200, 100);
+  let level2On = platforms2on;
+  for (let i = 0; i < level2On.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      level2On[i].xPosition,
+      level2On[i].yPosition,
+      level2On[i].width,
+      level2On[i].height
+    );
   }
-
-  //moon2
-  function moon2(y) {
-    noStroke();
+  let level2Off = platforms2off;
+  for (let i = 0; i < level2Off.length; i++) {
     fill(99, 235, 137);
-    rect(300, y - 100, 200, 200);
+    rect(
+      level2Off[i].xPosition,
+      level2Off[i].yPosition,
+      level2Off[i].width,
+      level2Off[i].height
+    );
   }
+  theFinalStar(850, 200, 10, 20, 5);
+}
 
-  //moon3
-  function moon3(y) {
-    noStroke();
-    fill(56, 56, 56);
-    rect(600, y - 200, 200, 300);
+//level4
+//level4
+//level4
+
+function level4on() {
+  fill(237, 215, 245);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level4On = platforms4on;
+  for (let i = 0; i < level4On.length; i++) {
+    fill(209, 133, 237);
+    rect(
+      level4On[i].xPosition,
+      level4On[i].yPosition,
+      level4On[i].width,
+      level4On[i].height
+    );
   }
+  let level4Off = platforms4off;
+  for (let i = 0; i < level4Off.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      level4Off[i].xPosition,
+      level4Off[i].yPosition,
+      level4Off[i].width,
+      level4Off[i].height
+    );
+  }
+  theFinalStar(850, 200, 10, 20, 5);
+}
 
-  moon1(ground);
-  moon2(ground);
-  moon3(ground);
+function level4off() {
+  fill(195, 247, 210);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level4On = platforms4on;
+  for (let i = 0; i < level4On.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      level4On[i].xPosition,
+      level4On[i].yPosition,
+      level4On[i].width,
+      level4On[i].height
+    );
+  }
+  let level4Off = platforms4off;
+  for (let i = 0; i < level4Off.length; i++) {
+    fill(99, 235, 137);
+    rect(
+      level4Off[i].xPosition,
+      level4Off[i].yPosition,
+      level4Off[i].width,
+      level4Off[i].height
+    );
+  }
   theFinalStar(850, 200, 10, 20, 5);
 }
 
@@ -233,7 +319,7 @@ function theFinalStar(x, y, radius1, radius2, npoints) {
 function death() {
   fill(231, 231, 231);
   rect(50, 50, 100, 50);
-  fill(0, 0, 255);
+  fill(0, 0, 0);
   textSize(20);
   textFont("Impact");
   text("Deaths: " + deathCount, 60, 65, 100, 50);
@@ -288,7 +374,7 @@ function draw() {
         speed = 0;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 > 400 && characterY1 > 550) {
+      else if (characterY1 > 550) {
         deathCount = deathCount + 1;
         characterX1 = 100;
         characterY1 = 300;
@@ -328,6 +414,14 @@ function draw() {
     level2on(0, 0);
     character(characterX1, characterY1);
 
+    //level complete
+    if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+      state = "level4on";
+      characterX1 = 50;
+      characterY1 = 0;
+      speed = 0;
+    }
+
     //the character doesnt go below the platform level ON
     if (state === "level2on") {
       if (characterX1 >= 0 && characterX1 < 200 && characterY1 + 50 >= ground) {
@@ -345,7 +439,7 @@ function draw() {
         canJump = true;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 > 200 && characterY1 > 550) {
+      else if (characterY1 > 550) {
         deathCount = deathCount + 1;
         characterX1 = 100;
         characterY1 = 300;
@@ -355,6 +449,13 @@ function draw() {
   } else if (state === "level2off") {
     level2off(0, 0);
     character(characterX1, characterY1);
+    //level complete
+    if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+      state = "level4on";
+      characterX1 = 50;
+      characterY1 = 0;
+      speed = 0;
+    }
 
     //the character doesnt go below the platform level OFF
     if (state === "level2off" && characterY1 + 50 >= ground - 100) {
@@ -364,13 +465,86 @@ function draw() {
         canJump = true;
       }
       //death count in case of falling and restart of the character to the start position
-      else if (characterX1 < 250 || characterX1 > 500) {
-        if (characterY1 > 550) {
-          deathCount = deathCount + 1;
-          characterX1 = 100;
-          characterY1 = 300;
-          speed = 0;
-        }
+      else if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
+    }
+  } //level 44444444
+  else if (state === "level4on") {
+    level4on(0, 0);
+    character(characterX1, characterY1);
+
+    //the character doesnt go below the platform level ON
+    if (state === "level4on") {
+      if (
+        characterX1 >= 0 &&
+        characterX1 < 100 &&
+        characterY1 + 350 >= ground
+      ) {
+        characterY1 = ground - 350;
+        speed = 0;
+        canJump = true;
+      }
+      if (
+        characterX1 > 350 &&
+        characterX1 < 500 &&
+        characterY1 + 150 >= ground
+      ) {
+        characterY1 = ground - 150;
+        speed = 0;
+        canJump = true;
+      }
+      if (
+        characterX1 > 750 &&
+        characterX1 < 860 &&
+        characterY1 + 150 >= ground
+      ) {
+        characterY1 = ground - 150;
+        speed = 0;
+        canJump = true;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = 30;
+        characterY1 = 0;
+        speed = 0;
+      }
+    }
+  } else if (state === "level4off") {
+    level4off(0, 0);
+
+    character(characterX1, characterY1);
+
+    //the character doesnt go below the platform level OFF
+    if (state === "level4off") {
+      if (
+        characterX1 > 150 &&
+        characterX1 <= 300 &&
+        characterY1 + 250 >= ground
+      ) {
+        characterY1 = ground - 250;
+        speed = 0;
+        canJump = true;
+      }
+      if (
+        characterX1 > 550 &&
+        characterX1 <= 700 &&
+        characterY1 + 50 >= ground
+      ) {
+        characterY1 = ground - 50;
+        speed = 0;
+        canJump = true;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = 30;
+        characterY1 = 0;
+        speed = 0;
       }
     }
   }
@@ -402,5 +576,9 @@ function keyPressed() {
     state = "level2off";
   } else if (keyCode === 32 && state === "level2off") {
     state = "level2on";
+  } else if (keyCode === 32 && state === "level4on") {
+    state = "level4off";
+  } else if (keyCode === 32 && state === "level4off") {
+    state = "level4on";
   }
 }

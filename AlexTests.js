@@ -43,34 +43,6 @@ let platforms4off = [
 
 noStroke();
 
-// function showPlatformsLevel1on() {
-//   fill(255, 255, 255);
-//   rect(
-//     platforms1on.xPosition,
-//     platforms1on.yPosition,
-//     platforms1on.width,
-//     platforms1on.height
-//   );
-// }
-
-// function showPlatformsLevel1off() {
-//   fill(255, 255, 255);
-//   noStroke();
-//   rect(
-//     platforms1off.xPosition,
-//     platforms1off.yPosition,
-//     platforms1off.width,
-//     platforms1off.height
-//   );
-// }
-// showPlatformsLevel1on();
-// showPlatformsLevel1off();
-
-console.log(platforms1on);
-console.log(platforms1off);
-console.log(platforms2on);
-console.log(platforms2off);
-
 //start screen
 function newGame(x, y, w, h) {
   fill(31, 31, 31);
@@ -123,16 +95,7 @@ function character(x, y) {
   endShape();
 }
 
-//level1
-//level1
-//level1
-
-function level1on() {
-  fill(237, 215, 245);
-  rect(0, 0, 900, 600);
-
-  death();
-
+function startText() {
   fill(0, 0, 0);
   textSize(30);
   textFont("Helvetica");
@@ -146,6 +109,18 @@ function level1on() {
   text(" ^ jump", 400, 210, 300, 300);
 
   text(" SPACE change worlds", 340, 240, 300, 300);
+}
+
+//level1
+//level1
+//level1
+
+function level1on() {
+  fill(237, 215, 245);
+  rect(0, 0, 900, 600);
+
+  death();
+  startText();
 
   let levelOn = platforms1on;
   for (let i = 0; i < levelOn.length; i++) {
@@ -175,20 +150,7 @@ function level1off() {
   rect(0, 0, 900, 600);
 
   death();
-
-  fill(0, 0, 0);
-  textSize(30);
-  textFont("Helvetica");
-  text("MOVEMENT", 360, 100, 300, 300);
-
-  textSize(20);
-  text(" < go left", 400, 150, 300, 300);
-
-  text(" > go right", 400, 180, 300, 300);
-
-  text(" ^ jump", 400, 210, 300, 300);
-
-  text(" SPACE change worlds", 340, 240, 300, 300);
+  startText();
 
   let levelOn = platforms1on;
   for (let i = 0; i < levelOn.length; i++) {
@@ -309,7 +271,7 @@ function level4on() {
 }
 
 function level4off() {
-  fill(237, 215, 245);
+  fill(195, 247, 210);
   rect(0, 0, 900, 600);
 
   death();
@@ -455,7 +417,7 @@ function draw() {
     //level complete
     if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
       state = "level4on";
-      characterX1 = 100;
+      characterX1 = 50;
       characterY1 = 0;
       speed = 0;
     }
@@ -490,7 +452,7 @@ function draw() {
     //level complete
     if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
       state = "level4on";
-      characterX1 = 100;
+      characterX1 = 50;
       characterY1 = 0;
       speed = 0;
     }
