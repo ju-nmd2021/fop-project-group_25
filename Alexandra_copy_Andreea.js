@@ -84,14 +84,21 @@ const platformTwoLvl4 = {
 const platformThreeLvl4 = {
   x: 150,
   y: 300,
-  w: 400,
+  w: 600,
   h: 30,
 };
 
 const platformFourLvl4 = {
-  x: 600,
+  x: 150,
+  y: 400,
+  w: 600,
+  h: 30,
+};
+
+const platformFiveLvl4 = {
+  x: 150,
   y: 500,
-  w: 150,
+  w: 600,
   h: 30,
 };
 
@@ -447,6 +454,15 @@ function level4on() {
     platformThreeLvl4.h
   );
 
+  // platformFive
+
+  rect(
+    platformFiveLvl4.x,
+    platformFiveLvl4.y,
+    platformFiveLvl4.w,
+    platformFiveLvl4.h
+  );
+
   //platformTwo
   fill(disabledPlatformColor);
   rect(
@@ -499,6 +515,14 @@ function level4off() {
     platformThreeLvl4.y,
     platformThreeLvl4.w,
     platformThreeLvl4.h
+  );
+
+  // platformFive
+  rect(
+    platformFiveLvl4.x,
+    platformFiveLvl4.y,
+    platformFiveLvl4.w,
+    platformFiveLvl4.h
   );
 
   //platformTwo and platformFour
@@ -774,7 +798,7 @@ function draw() {
     character(characterX1, characterY1); //drawing the character
 
     //level complete
-    if (characterX1 + 50 > starLvl4.x && characterY1 + 50 > starLvl4.y) {
+    if (characterY1 + 50 > starLvl4.x && characterY1 + 50 > starLvl4.y) {
       state = "level5on";
       characterX1 = 100;
       characterY1 = 300; //depending where I want to put the character in lvl 5
@@ -796,11 +820,23 @@ function draw() {
     }
     //platformThree
     else if (
-      characterX1 > platformThreeLvl4.x &&
-      characterX1 < platformThreeLvl4.x + platformThreeLvl4.w
+      characterX1 > platformThreeLvl4.y &&
+      characterX1 < platformThreeLvl4.y + platformThreeLvl4.w
     ) {
       if (characterY1 + 50 > platformThreeLvl4.y) {
         characterY1 = platformThreeLvl4.y - 50;
+        canJump = true;
+        speed = 0;
+      }
+    }
+
+    // platoformFive
+    if (
+      characterX1 > platformFiveLvl4.x &&
+      characterX1 < platformFiveLvl4.x + platformFiveLvl4.w
+    ) {
+      if (characterY1 + 50 > platformFiveLvl4.y) {
+        characterY1 = platformFiveLvl4.y - 50;
         canJump = true;
         speed = 0;
       }
@@ -834,6 +870,21 @@ function draw() {
         speed = 0;
       }
     }
+
+    // platformFour
+    if (
+      characterX1 > platformFourLvl4.x &&
+      characterX1 < platformFourLvl4.x + platformFourLvl4.w
+    ) {
+      if (characterY1 + 50 > platformFourLvl4.y) {
+        characterY1 = platformFourLvl4.y - 50;
+        canJump = true;
+        speed = 0;
+      }
+    }
+
+    // platformThree
+
     //the rest of the canvas (excepting platformOne and platformThree)
     else {
       if (characterY1 > 550) {
