@@ -5,7 +5,7 @@ let state = "start";
 let speed = 0;
 const gravity = 1;
 let characterX1 = 100;
-let characterY1 = 450;
+let characterY1 = 300;
 let deathCount = 0;
 let canJump = true;
 
@@ -181,6 +181,9 @@ function checkForCollision(x, y) {
   for (let i = 0; i < platforms1on.length; i++) {
     if (collisionDetectorObject(x, y, platforms1on[i])) {
       console.log("collision");
+      canJump = true;
+      characterY1 = platforms1on[i].yPosition - 50;
+      speed = 0;
       collisionIsDetected = true;
     }
   }
@@ -201,9 +204,9 @@ function checkForCollision2(x, y) {
 function collisionDetectorObject(x, y, object) {
   if (
     x > object.xPosition &&
-    x > object.xPosition + object.width &&
-    y > object.yPosition &&
-    y < object.yPosition + object.height
+    x < object.xPosition + object.width &&
+    y > object.yPosition - 50 &&
+    y < object.yPosition + object.height - 50
   ) {
     return true;
   } else {
@@ -222,15 +225,13 @@ function draw() {
     //jumping
     speed = -20;
     canJump = false;
-  } else if (keyIsDown(37)) {
-    tempCharacterX1 = tempCharacterX1 - 6;
-  } else if (keyIsDown(39)) {
-    tempCharacterX1 = tempCharacterX1 + 6;
   }
 
-  if (checkForCollision(tempCharacterX1, tempCharacterY1) === false) {
-    characterX1 = tempCharacterX1;
-    characterY1 = tempCharacterY1;
+  if (keyIsDown(37)) {
+    tempCharacterX1 = tempCharacterX1 - 6;
+  }
+  if (keyIsDown(39)) {
+    tempCharacterX1 = tempCharacterX1 + 6;
   }
 
   //gravity
@@ -243,27 +244,34 @@ function draw() {
   if (tempCharacterX1 + 50 > 900) {
     tempCharacterX1 = 900 - 50;
   }
-
+  const collisionIsDetected = checkForCollision(
+    tempCharacterX1,
+    tempCharacterY1
+  );
+  if (collisionIsDetected === false) {
+    characterY1 = tempCharacterY1;
+    characterX1 = tempCharacterX1;
+  }
   if (state === "start") {
     newGame(350, 250, 200, 100);
   }
   //level 11111111111111111111
   else if (state === "level1on") {
     level1on(0, 0);
-    character(tempCharacterX1, tempCharacterY1);
-    if (tempCharacterY1 > 550) {
+    character(characterX1, characterY1);
+    if (characterY1 > 550) {
       deathCount = deathCount + 1;
-      tempCharacterX1 = 100;
-      tempCharacterY1 = 300;
+      characterX1 = 100;
+      characterY1 = 300;
       speed = 0;
     }
   } else if (state === "level1off") {
     level1off(0, 0);
-    character(tempCharacterX1, tempCharacterY1);
-    if (tempCharacterY1 > 550) {
+    character(characterX1, characterY1);
+    if (characterY1 > 550) {
       deathCount = deathCount + 1;
-      tempCharacterX1 = 100;
-      tempCharacterX1 = 300;
+      characterX1 = 100;
+      characterX1 = 300;
       speed = 0;
     }
   }
