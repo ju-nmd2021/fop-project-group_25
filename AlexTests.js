@@ -8,6 +8,7 @@ let characterX1 = 100;
 let characterY1 = 450;
 let deathCount = 0;
 let canJump = true;
+let r = 0.0;
 
 //platforms level 11111
 let platforms1on = [{ xPosition: 0, yPosition: 500, width: 400, height: 100 }];
@@ -39,6 +40,21 @@ let platforms4off = [
   { xPosition: 200, yPosition: 300, width: 100, height: 300 },
 
   { xPosition: 600, yPosition: 500, width: 100, height: 300 },
+];
+
+//platforms level 55555
+let platforms5on = [
+  { xPosition: 0, yPosition: 500, width: 300, height: 100 },
+
+  { xPosition: 300, yPosition: 300, width: 300, height: 300 },
+
+  { xPosition: 600, yPosition: 100, width: 300, height: 500 },
+];
+
+let platforms5off = [
+  { xPosition: 200, yPosition: 400, width: 100, height: 100 },
+
+  { xPosition: 500, yPosition: 200, width: 100, height: 100 },
 ];
 
 noStroke();
@@ -142,7 +158,7 @@ function level1on() {
       levelOff[i].height
     );
   }
-  theFinalStar(850, 470, 10, 20, 5);
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 470);
 }
 
 function level1off() {
@@ -172,7 +188,7 @@ function level1off() {
       levelOff[i].height
     );
   }
-  theFinalStar(850, 470, 10, 20, 5);
+  theFinalStar(0, 0, 10, 20, 5, 850, 470);
 }
 
 //level2
@@ -180,14 +196,14 @@ function level1off() {
 //level2
 
 function level2on() {
-  fill(237, 215, 245);
+  fill(240, 201, 175);
   rect(0, 0, 900, 600);
 
   death();
 
   let level2On = platforms2on;
   for (let i = 0; i < level2On.length; i++) {
-    fill(209, 133, 237);
+    fill(241, 158, 104);
     rect(
       level2On[i].xPosition,
       level2On[i].yPosition,
@@ -205,11 +221,11 @@ function level2on() {
       level2Off[i].height
     );
   }
-  theFinalStar(850, 200, 10, 20, 5);
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 100);
 }
 
 function level2off() {
-  fill(195, 247, 210);
+  fill(165, 194, 237);
   rect(0, 0, 900, 600);
 
   death();
@@ -226,7 +242,7 @@ function level2off() {
   }
   let level2Off = platforms2off;
   for (let i = 0; i < level2Off.length; i++) {
-    fill(99, 235, 137);
+    fill(109, 160, 234);
     rect(
       level2Off[i].xPosition,
       level2Off[i].yPosition,
@@ -234,7 +250,8 @@ function level2off() {
       level2Off[i].height
     );
   }
-  theFinalStar(850, 200, 10, 20, 5);
+
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 100);
 }
 
 //level4
@@ -242,64 +259,129 @@ function level2off() {
 //level4
 
 function level4on() {
+  fill(241, 179, 185);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level4On = platforms4on;
+  for (let i = 0; i < level4On.length; i++) {
+    fill(240, 111, 124);
+    rect(
+      level4On[i].xPosition,
+      level4On[i].yPosition,
+      level4On[i].width,
+      level4On[i].height
+    );
+  }
+  let level4Off = platforms4off;
+  for (let i = 0; i < level4Off.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      level4Off[i].xPosition,
+      level4Off[i].yPosition,
+      level4Off[i].width,
+      level4Off[i].height
+    );
+  }
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 200);
+}
+
+function level4off() {
+  fill(241, 235, 179);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level4On = platforms4on;
+  for (let i = 0; i < level4On.length; i++) {
+    fill(255, 255, 255);
+    rect(
+      level4On[i].xPosition,
+      level4On[i].yPosition,
+      level4On[i].width,
+      level4On[i].height
+    );
+  }
+  let level4Off = platforms4off;
+  for (let i = 0; i < level4Off.length; i++) {
+    fill(240, 227, 111);
+    rect(
+      level4Off[i].xPosition,
+      level4Off[i].yPosition,
+      level4Off[i].width,
+      level4Off[i].height
+    );
+  }
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 200);
+}
+
+//level 5
+//level 5
+//level 5
+
+function level5on() {
   fill(237, 215, 245);
   rect(0, 0, 900, 600);
 
   death();
 
-  let level4On = platforms4on;
-  for (let i = 0; i < level4On.length; i++) {
+  let level5On = platforms5on;
+  for (let i = 0; i < level5On.length; i++) {
     fill(209, 133, 237);
     rect(
-      level4On[i].xPosition,
-      level4On[i].yPosition,
-      level4On[i].width,
-      level4On[i].height
+      level5On[i].xPosition,
+      level5On[i].yPosition,
+      level5On[i].width,
+      level5On[i].height
     );
   }
-  let level4Off = platforms4off;
-  for (let i = 0; i < level4Off.length; i++) {
+  let level5Off = platforms5off;
+  for (let i = 0; i < level5Off.length; i++) {
     fill(255, 255, 255);
     rect(
-      level4Off[i].xPosition,
-      level4Off[i].yPosition,
-      level4Off[i].width,
-      level4Off[i].height
+      level5Off[i].xPosition,
+      level5Off[i].yPosition,
+      level5Off[i].width,
+      level5Off[i].height
     );
   }
-  theFinalStar(850, 200, 10, 20, 5);
+  theFinalStar(850, 50, 10, 20, 5);
 }
 
-function level4off() {
-  fill(195, 247, 210);
+function level5off() {
+  fill(237, 215, 245);
   rect(0, 0, 900, 600);
 
   death();
 
-  let level4On = platforms4on;
-  for (let i = 0; i < level4On.length; i++) {
+  let level5On = platforms5on;
+  for (let i = 0; i < level5On.length; i++) {
     fill(255, 255, 255);
     rect(
-      level4On[i].xPosition,
-      level4On[i].yPosition,
-      level4On[i].width,
-      level4On[i].height
+      level5On[i].xPosition,
+      level5On[i].yPosition,
+      level5On[i].width,
+      level5On[i].height
     );
   }
-  let level4Off = platforms4off;
-  for (let i = 0; i < level4Off.length; i++) {
+  let level5Off = platforms5off;
+  for (let i = 0; i < level5Off.length; i++) {
     fill(99, 235, 137);
     rect(
-      level4Off[i].xPosition,
-      level4Off[i].yPosition,
-      level4Off[i].width,
-      level4Off[i].height
+      level5Off[i].xPosition,
+      level5Off[i].yPosition,
+      level5Off[i].width,
+      level5Off[i].height
     );
   }
-  theFinalStar(850, 200, 10, 20, 5);
+  theFinalStar(850, 50, 10, 20, 5);
 }
 
-function theFinalStar(x, y, radius1, radius2, npoints) {
+function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
+  push();
+  translate(translateX, translateY);
+  rotate(r);
   fill(255, 255, 255);
   let angle = TWO_PI / npoints;
   let halfAngle = angle / 2.0;
@@ -313,6 +395,7 @@ function theFinalStar(x, y, radius1, radius2, npoints) {
     vertex(sx, sy);
   }
   endShape(CLOSE);
+  pop();
 }
 
 //death count
@@ -338,6 +421,9 @@ function draw() {
   } else if (keyIsDown(39)) {
     characterX1 = characterX1 + 6;
   }
+
+  //star
+  r = r + 0.1;
 
   //gravity
   speed = speed + gravity;
@@ -415,7 +501,7 @@ function draw() {
     character(characterX1, characterY1);
 
     //level complete
-    if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+    if (characterX1 + 50 > 830 && characterY1 > 50 && characterY1 < 220) {
       state = "level4on";
       characterX1 = 50;
       characterY1 = 0;
@@ -477,6 +563,14 @@ function draw() {
     level4on(0, 0);
     character(characterX1, characterY1);
 
+    //level complete
+    if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+      state = "level5on";
+      characterX1 = 100;
+      characterY1 = 300;
+      speed = 0;
+    }
+
     //the character doesnt go below the platform level ON
     if (state === "level4on") {
       if (
@@ -519,6 +613,14 @@ function draw() {
 
     character(characterX1, characterY1);
 
+    //level complete
+    if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+      state = "level5on";
+      characterX1 = 100;
+      characterY1 = 300;
+      speed = 0;
+    }
+
     //the character doesnt go below the platform level OFF
     if (state === "level4off") {
       if (
@@ -548,8 +650,95 @@ function draw() {
       }
     }
   }
-}
+  /////level55555
+  else if (state === "level5on") {
+    level5on(0, 0);
+    character(characterX1, characterY1);
 
+    //level complete
+    // if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+    //   state = "level6on";
+    //   characterX1 = 100;
+    //   characterY1 = 300;
+    //   speed = 0;
+    // }
+
+    //the character doesnt go below the platform level OFF
+    if (state === "level5on") {
+      //platform
+      if (characterX1 > 0 && characterX1 <= 250 && characterY1 + 50 >= ground) {
+        characterY1 = ground - 50;
+        speed = 0;
+        canJump = true;
+      }
+      if (
+        characterX1 > 250 &&
+        characterX1 <= 550 &&
+        characterY1 + 250 >= ground
+      ) {
+        characterY1 = ground - 250;
+        speed = 0;
+        canJump = true;
+      }
+      if (
+        characterX1 > 550 &&
+        characterX1 <= 900 &&
+        characterY1 + 450 >= ground
+      ) {
+        characterY1 = ground - 450;
+        speed = 0;
+        canJump = true;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
+    }
+  } else if (state === "level5off") {
+    level5off(0, 0);
+    character(characterX1, characterY1);
+
+    //level complete
+    // if (characterX1 + 50 > 830 && characterY1 > 150 && characterY1 < 220) {
+    //   state = "level6on";
+    //   characterX1 = 100;
+    //   characterY1 = 300;
+    //   speed = 0;
+    // }
+
+    //the character doesnt go below the platform level OFF
+    if (state === "level5off") {
+      if (
+        characterX1 > 150 &&
+        characterX1 <= 300 &&
+        characterY1 + 150 >= ground
+      ) {
+        characterY1 = ground - 150;
+        speed = 0;
+        canJump = true;
+      }
+      if (
+        characterX1 > 450 &&
+        characterX1 <= 600 &&
+        characterY1 + 350 >= ground
+      ) {
+        characterY1 = ground - 350;
+        speed = 0;
+        canJump = true;
+      }
+      //death count in case of falling and restart of the character to the start position
+      else if (characterY1 > 550) {
+        deathCount = deathCount + 1;
+        characterX1 = 100;
+        characterY1 = 300;
+        speed = 0;
+      }
+    }
+  }
+}
 function mouseClicked() {
   if (
     state === "start" &&
@@ -580,5 +769,9 @@ function keyPressed() {
     state = "level4off";
   } else if (keyCode === 32 && state === "level4off") {
     state = "level4on";
+  } else if (keyCode === 32 && state === "level5on") {
+    state = "level5off";
+  } else if (keyCode === 32 && state === "level5off") {
+    state = "level5on";
   }
 }
