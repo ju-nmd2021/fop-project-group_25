@@ -123,21 +123,21 @@ const platformOneLvl5 = {
 
 const platformTwoLvl5 = {
   x: 450,
-  y: 270,
+  y: 0,
   w: 30,
-  h: 270,
+  h: 300,
 };
 
 const platformThreeLvl5 = {
   x: 0,
   y: 500,
   w: 900,
-  h: 30,
+  h: 100,
 };
 
 const starLvl5 = {
   x: 720, //change this
-  y: 470,
+  y: 280,
   radius1: 10,
   radius2: 20,
   nPoints: 5,
