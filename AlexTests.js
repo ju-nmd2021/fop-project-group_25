@@ -321,14 +321,14 @@ function level4off() {
 //level 5
 
 function level5on() {
-  fill(237, 215, 245);
+  fill(241, 237, 179);
   rect(0, 0, 900, 600);
 
   death();
 
   let level5On = platforms5on;
   for (let i = 0; i < level5On.length; i++) {
-    fill(209, 133, 237);
+    fill(229, 222, 105);
     rect(
       level5On[i].xPosition,
       level5On[i].yPosition,
@@ -346,11 +346,11 @@ function level5on() {
       level5Off[i].height
     );
   }
-  theFinalStar(850, 50, 10, 20, 5);
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 50);
 }
 
 function level5off() {
-  fill(237, 215, 245);
+  fill(206, 179, 241);
   rect(0, 0, 900, 600);
 
   death();
@@ -367,7 +367,7 @@ function level5off() {
   }
   let level5Off = platforms5off;
   for (let i = 0; i < level5Off.length; i++) {
-    fill(99, 235, 137);
+    fill(161, 104, 233);
     rect(
       level5Off[i].xPosition,
       level5Off[i].yPosition,
@@ -375,7 +375,7 @@ function level5off() {
       level5Off[i].height
     );
   }
-  theFinalStar(850, 50, 10, 20, 5);
+  theFinalStar(x + 0, y + 0, 10, 20, 5, 850, 50);
 }
 
 function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
