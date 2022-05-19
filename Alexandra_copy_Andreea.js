@@ -734,7 +734,7 @@ function draw() {
 
     //platformOne
     if (
-      characterX1 > platformOneLvl3.x &&
+      characterX1 > platformOneLvl3.x - 50 &&
       characterX1 < platformOneLvl3.x + platformOneLvl3.w
     ) {
       if (characterY1 + 50 > platformOneLvl3.y) {
@@ -745,7 +745,7 @@ function draw() {
     }
     //platformThree
     else if (
-      characterX1 > platformThreeLvl3.x &&
+      characterX1 > platformThreeLvl3.x - 50 &&
       characterX1 < platformThreeLvl3.x + platformThreeLvl3.w
     ) {
       if (characterY1 + 50 > platformThreeLvl3.y) {
@@ -773,10 +773,13 @@ function draw() {
 
     //platformTwo
     if (
-      characterX1 > platformTwoLvl3.x &&
+      characterX1 > platformTwoLvl3.x - 50 &&
       characterX1 < platformTwoLvl3.x + platformTwoLvl3.w
     ) {
-      if (characterY1 + 50 > platformTwoLvl3.y) {
+      if (
+        characterY1 + 50 > platformTwoLvl3.y &&
+        characterY1 + 50 < platformTwoLvl3.y + 51
+      ) {
         characterY1 = platformTwoLvl3.y - 50;
         canJump = true;
         speed = 0;
@@ -809,21 +812,27 @@ function draw() {
 
     //platformOne
     if (
-      characterX1 > platformOneLvl4.x &&
+      characterX1 > platformOneLvl4.x - 50 &&
       characterX1 < platformOneLvl4.x + platformOneLvl4.w
     ) {
-      if (characterY1 + 50 > platformOneLvl4.y) {
+      if (
+        characterY1 + 50 > platformOneLvl4.y &&
+        characterY1 < platformOneLvl4.y + platformOneLvl4.h
+      ) {
         characterY1 = platformOneLvl4.y - 50;
         canJump = true;
         speed = 0;
       }
     }
     //platformThree
-    else if (
-      characterX1 > platformThreeLvl4.y &&
-      characterX1 < platformThreeLvl4.y + platformThreeLvl4.w
+    if (
+      characterX1 > platformThreeLvl4.x - 50 &&
+      characterX1 < platformThreeLvl4.x + platformThreeLvl4.w
     ) {
-      if (characterY1 + 50 > platformThreeLvl4.y) {
+      if (
+        characterY1 + 50 > platformThreeLvl4.y &&
+        characterY1 < platformThreeLvl4.y + platformThreeLvl4.h
+      ) {
         characterY1 = platformThreeLvl4.y - 50;
         canJump = true;
         speed = 0;
@@ -832,23 +841,25 @@ function draw() {
 
     // platoformFive
     if (
-      characterX1 > platformFiveLvl4.x &&
+      characterX1 > platformFiveLvl4.x - 50 &&
       characterX1 < platformFiveLvl4.x + platformFiveLvl4.w
     ) {
-      if (characterY1 + 50 > platformFiveLvl4.y) {
+      if (
+        characterY1 + 50 > platformFiveLvl4.y &&
+        characterY1 < platformFiveLvl4.y + platformFiveLvl4.h
+      ) {
         characterY1 = platformFiveLvl4.y - 50;
         canJump = true;
         speed = 0;
       }
     }
     //the rest of the canvas (excepting platformOne and platformThree)
-    else {
-      if (characterY1 > 550) {
-        deathCount = deathCount + 1;
-        characterX1 = platformOneLvl4.x + 20;
-        characterY1 = platformOneLvl4.y + 50;
-        speed = 0;
-      }
+
+    if (characterY1 > 550) {
+      deathCount = deathCount + 1;
+      characterX1 = platformOneLvl4.x + 20;
+      characterY1 = platformOneLvl4.y - 50;
+      speed = 0;
     }
   }
 
@@ -861,10 +872,13 @@ function draw() {
 
     //platformTwo
     if (
-      characterX1 > platformTwoLvl4.x &&
+      characterX1 > platformTwoLvl4.x - 50 &&
       characterX1 < platformTwoLvl4.x + platformTwoLvl4.w
     ) {
-      if (characterY1 + 50 > platformTwoLvl4.y) {
+      if (
+        characterY1 + 50 > platformTwoLvl4.y &&
+        characterY1 + 50 < platformTwoLvl4.y + platformTwoLvl4.h
+      ) {
         characterY1 = platformTwoLvl4.y - 50;
         canJump = true;
         speed = 0;
@@ -873,28 +887,30 @@ function draw() {
 
     // platformFour
     if (
-      characterX1 > platformFourLvl4.x &&
+      characterX1 > platformFourLvl4.x - 50 &&
       characterX1 < platformFourLvl4.x + platformFourLvl4.w
     ) {
-      if (characterY1 + 50 > platformFourLvl4.y) {
+      if (
+        characterY1 + 50 > platformFourLvl4.y &&
+        characterY1 + 50 < platformFourLvl4.y + platformFourLvl4.h
+      ) {
         characterY1 = platformFourLvl4.y - 50;
         canJump = true;
         speed = 0;
       }
     }
 
-    // platformThree
-
     //the rest of the canvas (excepting platformOne and platformThree)
-    else {
-      if (characterY1 > 550) {
-        deathCount = deathCount + 1;
-        characterX1 = platformOneLvl4.x + 20;
-        characterY1 = platformOneLvl4.y - 50;
-        speed = 0;
-      }
+
+    if (characterY1 > 550) {
+      deathCount = deathCount + 1;
+      characterX1 = platformOneLvl4.x + 20;
+      characterY1 = platformOneLvl4.y - 50;
+      speed = 0;
+      state = "level4on";
     }
   }
+
   //////////////////////////////////// if states for level 4
 }
 
