@@ -315,6 +315,67 @@ function level4off() {
   pop();
 }
 
+//level5
+//level5
+//level5
+
+function level5on() {
+  push();
+  fill(206, 179, 241);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level5On = platforms5on;
+  for (let i = 0; i < level5On.length; i++) {
+    fill(161, 104, 233);
+    rect(level5On[i].x, level5On[i].y, level5On[i].width, level5On[i].height);
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = true;
+  platforms5off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 50);
+  pop();
+}
+
+function level5off() {
+  push();
+  fill(241, 237, 179);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level5Off = platforms5off;
+  for (let i = 0; i < level5Off.length; i++) {
+    fill(229, 222, 105);
+    rect(
+      level5Off[i].x,
+      level5Off[i].y,
+      level5Off[i].width,
+      level5Off[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 50);
+  pop();
+}
+
 //death count
 function death() {
   fill(231, 231, 231);
@@ -419,6 +480,24 @@ function draw() {
       player.y = platform.y;
     }
   }
+  for (let platform of platforms5on) {
+    if (
+      platforms5on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms5off) {
+    if (
+      platforms5off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
   if (verticalCollisionDetected) {
     player.speedY = 0;
     player.canJump = true;
@@ -475,6 +554,22 @@ function draw() {
       horizontalCollisionDetected = true;
     }
   }
+  for (let platform of platforms5on) {
+    if (
+      platforms5on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms5off) {
+    if (
+      platforms5off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
 
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
@@ -498,7 +593,9 @@ function draw() {
       state === "level1on" ||
       state === "level1off" ||
       state === "level2on" ||
-      state === "level2off"
+      state === "level2off" ||
+      state === "level5on" ||
+      state === "level5off"
     ) {
       deathCount = deathCount + 1;
       player.x = 100;
@@ -567,8 +664,36 @@ function draw() {
   } else if (state === "level4on") {
     level4on(0, 0);
     character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 830 &&
+      tempCharacterY1 > 150 &&
+      tempCharacterY1 < 220
+    ) {
+      state = "level5on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
   } else if (state === "level4off") {
     level4off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 830 &&
+      tempCharacterY1 > 150 &&
+      tempCharacterY1 < 220
+    ) {
+      state = "level5on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
+  } else if (state === "level5on") {
+    level5on(0, 0);
+    character(player.x, player.y);
+  } else if (state === "level5off") {
+    level5off(0, 0);
     character(player.x, player.y);
   }
 
