@@ -668,7 +668,7 @@ function draw() {
     if (
       tempCharacterX1 + 50 > 830 &&
       tempCharacterY1 > 150 &&
-      tempCharacterY1 < 220
+      tempCharacterY1 < 250
     ) {
       state = "level5on";
       player.x = 100;
@@ -682,7 +682,7 @@ function draw() {
     if (
       tempCharacterX1 + 50 > 830 &&
       tempCharacterY1 > 150 &&
-      tempCharacterY1 < 220
+      tempCharacterY1 < 250
     ) {
       state = "level5on";
       player.x = 100;
