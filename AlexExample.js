@@ -187,7 +187,6 @@ function level1on() {
     fill(209, 133, 237);
     rect(levelOn[i].x, levelOn[i].y, levelOn[i].width, levelOn[i].height);
   }
-
   platforms1on.visible = true;
   platforms1off.visible = false;
 
@@ -217,31 +216,36 @@ function level1off() {
 //level2
 
 function level2on() {
-  fill(237, 215, 245);
+  fill(240, 201, 175);
   rect(0, 0, 900, 600);
 
   death();
 
   let level2On = platforms2on;
   for (let i = 0; i < level2On.length; i++) {
-    fill(209, 133, 237);
+    fill(241, 158, 104);
     rect(level2On[i].x, level2On[i].y, level2On[i].width, level2On[i].height);
   }
   platforms1on.visible = false;
   platforms1off.visible = false;
   platforms2on.visible = true;
   platforms2off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 100);
 }
 
 function level2off() {
-  fill(237, 215, 245);
+  push();
+  fill(165, 194, 237);
   rect(0, 0, 900, 600);
 
   death();
 
   let level2Off = platforms2off;
   for (let i = 0; i < level2Off.length; i++) {
-    fill(209, 133, 237);
+    fill(109, 160, 234);
     rect(
       level2Off[i].x,
       level2Off[i].y,
@@ -249,11 +253,66 @@ function level2off() {
       level2Off[i].height
     );
   }
-
   platforms1on.visible = false;
   platforms1off.visible = false;
   platforms2on.visible = false;
   platforms2off.visible = true;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 100);
+  pop();
+}
+
+function level4on() {
+  push();
+  fill(241, 179, 185);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level4On = platforms4on;
+  for (let i = 0; i < level4On.length; i++) {
+    fill(240, 111, 124);
+    rect(level4On[i].x, level4On[i].y, level4On[i].width, level4On[i].height);
+  }
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms4on.visible = true;
+  platforms4off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 200);
+  pop();
+}
+
+function level4off() {
+  push();
+  fill(241, 235, 179);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level4Off = platforms4off;
+  for (let i = 0; i < level4Off.length; i++) {
+    fill(240, 227, 111);
+    rect(
+      level4Off[i].x,
+      level4Off[i].y,
+      level4Off[i].width,
+      level4Off[i].height
+    );
+  }
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 200);
+  pop();
 }
 
 //death count
@@ -342,6 +401,24 @@ function draw() {
       player.y = platform.y;
     }
   }
+  for (let platform of platforms4on) {
+    if (
+      platforms4on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms4off) {
+    if (
+      platforms4off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
   if (verticalCollisionDetected) {
     player.speedY = 0;
     player.canJump = true;
@@ -382,6 +459,22 @@ function draw() {
       horizontalCollisionDetected = true;
     }
   }
+  for (let platform of platforms4on) {
+    if (
+      platforms4on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms4off) {
+    if (
+      platforms4off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
 
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
@@ -401,10 +494,22 @@ function draw() {
   }
   //death count
   if (player.y > 650) {
-    deathCount = deathCount + 1;
-    player.x = 100;
-    player.y = 300;
-    player.speedY = 0;
+    if (
+      state === "level1on" ||
+      state === "level1off" ||
+      state === "level2on" ||
+      state === "level2off"
+    ) {
+      deathCount = deathCount + 1;
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    } else if (state === "level4on" || state === "level4off") {
+      deathCount = deathCount + 1;
+      player.x = 50;
+      player.y = 0;
+      player.speedY = 0;
+    }
   }
 
   if (state === "start") {
@@ -413,9 +518,9 @@ function draw() {
   //level 11111111111111111111
   else if (state === "level1on") {
     level1on(0, 0);
-    character(player);
+    character(player.x, player.y);
     //level complete
-    if (tempCharacterX1 + 50 > 830 && tempCharacterY1 > 430) {
+    if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
       state = "level2on";
       player.x = 100;
       player.y = 300;
@@ -423,9 +528,9 @@ function draw() {
     }
   } else if (state === "level1off") {
     level1off(0, 0);
-    character(player);
+    character(player.x, player.y);
     //level complete
-    if (tempCharacterX1 + 50 > 830 && tempCharacterY1 > 430) {
+    if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
       state = "level2on";
       player.x = 100;
       player.y = 300;
@@ -433,10 +538,38 @@ function draw() {
     }
   } else if (state === "level2on") {
     level2on(0, 0);
-    character(player);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 830 &&
+      tempCharacterY1 > 50 &&
+      tempCharacterY1 < 150
+    ) {
+      state = "level4on";
+      player.x = 50;
+      player.y = 0;
+      player.speedY = 0;
+    }
   } else if (state === "level2off") {
     level2off(0, 0);
-    character(player);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 830 &&
+      tempCharacterY1 > 50 &&
+      tempCharacterY1 < 150
+    ) {
+      state = "level4on";
+      player.x = 50;
+      player.y = 0;
+      player.speedY = 0;
+    }
+  } else if (state === "level4on") {
+    level4on(0, 0);
+    character(player.x, player.y);
+  } else if (state === "level4off") {
+    level4off(0, 0);
+    character(player.x, player.y);
   }
 
   fill(255, 255, 255);
