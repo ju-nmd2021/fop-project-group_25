@@ -136,8 +136,8 @@ const platformThreeLvl5 = {
 };
 
 const starLvl5 = {
-  x: 720, //change this
-  y: 280,
+  x: 720,
+  y: 260,
   radius1: 10,
   radius2: 20,
   nPoints: 5,
@@ -981,7 +981,6 @@ function draw() {
         speed = 0;
       }
     }
-    //the rest of the canvas (excepting platformOne and platformThree)
 
     if (characterY1 > 550) {
       deathCount = deathCount + 1;
@@ -1012,7 +1011,6 @@ function draw() {
         speed = 0;
       }
     }
-
     // platformFour
     if (
       characterX1 > platformFourLvl4.x - 50 &&
@@ -1035,7 +1033,9 @@ function draw() {
       speed = 0;
       state = "level4on";
     }
-  } //////////////////////////////////// end ifif states for level 4
+  } //////////////////////////////////// end if states for level 4
+
+  // start of level 5555555
   else if (state === "level5on") {
     level5on(); //defining the canvas and platforms and stuff
     character(characterX1, characterY1); //drawing the character
@@ -1047,7 +1047,6 @@ function draw() {
       characterY1 = 100;
       speed = 0;
     }
-
     //the character doesnt go below the platform level ON
 
     //platform 1 the start point
@@ -1061,23 +1060,15 @@ function draw() {
         speed = 0;
       }
     }
+
     //platformTwo
-    else if (
-      characterX1 > platformTwoLvl5.x - 50 &&
-      characterX1 < platformTwoLvl5.x + platformTwoLvl5.w
-    ) {
-      if (characterY1 + 50 > platformTwoLvl5.y) {
-        characterY1 = platformTwoLvl5.y - 50;
-        canJump = true;
-        speed = 0;
-      }
-    }
+
     //the rest of the canvas (excepting platformOne and platformThree)
     else {
       if (characterY1 > 550) {
         deathCount = deathCount + 1;
         characterX1 = platformOneLvl5.x + 20;
-        characterY1 = platformOneLvl5.y + 50;
+        characterY1 = platformOneLvl5.y - 50;
         speed = 0;
       }
     }
@@ -1087,30 +1078,27 @@ function draw() {
     level5off(); //defining the canvas and platforms and stuff
     character(characterX1, characterY1); //drawing the character
 
-    //the character doesnt go below the platform level ON
-
     //platformThree
+
     if (
       characterX1 > platformThreeLvl5.x - 50 &&
       characterX1 < platformThreeLvl5.x + platformThreeLvl5.w
     ) {
       if (
         characterY1 + 50 > platformThreeLvl5.y &&
-        characterY1 + 50 < platformThreeLvl5.y + 51
+        characterY1 < platformThreeLvl5.y + platformThreeLvl5.h
       ) {
         characterY1 = platformThreeLvl5.y - 50;
         canJump = true;
         speed = 0;
       }
     }
-    //the rest of the canvas (excepting platformOne and platformThree)
-    else {
-      if (characterY1 > 550) {
-        deathCount = deathCount + 1;
-        characterX1 = platformOneLvl5.x + 20;
-        characterY1 = platformOneLvl5.y - 50;
-        speed = 0;
-      }
+  } else {
+    if (characterY1 > 550) {
+      deathCount = deathCount + 1;
+      characterX1 = platformOneLvl5.x + 20;
+      characterY1 = platformOneLvl5.y - 50;
+      speed = 0;
     }
   }
 }
