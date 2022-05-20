@@ -1,5 +1,3 @@
-let x = 0;
-let y = 0;
 let ground = 500;
 let state = "start";
 let speed = 0;
@@ -9,12 +7,28 @@ let characterY1 = 300;
 let deathCount = 0;
 let canJump = true;
 
+//canvas
+let canvas = [
+  { x: -10, y: -10, width: 30, height: 610 },
+  { x: 875, y: -10, width: 10, height: 610 },
+];
+
 //platforms level 11111
-let platforms1on = [{ xPosition: 0, yPosition: 500, width: 400, height: 100 }];
+let platforms1on = [{ x: 0, y: 500, width: 400, height: 100, visible: false }];
 
 let platforms1off = [
-  { xPosition: 600, yPosition: 500, width: 300, height: 100 },
+  { x: 600, y: 500, width: 300, height: 100, visible: false },
 ];
+
+//character object
+const player = {
+  x: 100,
+  y: 300,
+  width: 50,
+  height: 50,
+  speedY: 0,
+  canJump: true,
+};
 
 noStroke();
 
@@ -48,26 +62,36 @@ function newGame(x, y, w, h) {
 }
 
 //character
-function character(x, y) {
+function character(object) {
+  push();
+  translate(25, 0);
   fill(247, 162, 99);
-  rect(x, y, 50, 50);
+  rect(player.x - 50, player.y - 50, player.width, player.height);
   fill(255, 255, 255);
-  ellipse(x + 13, y + 20, 20, 20);
-  ellipse(x + 37, y + 20, 20, 20);
+  ellipse(player.x + 13 - 50, player.y + 20 - 50, 20, 20);
+  ellipse(player.x + 37 - 50, player.y + 20 - 50, 20, 20);
   fill(0, 0, 0);
-  ellipse(x + 13, y + 20, 5, 5);
-  ellipse(x + 37, y + 20, 5, 5);
+  ellipse(player.x + 13 - 50, player.y + 20 - 50, 5, 5);
+  ellipse(player.x + 37 - 50, player.y + 20 - 50, 5, 5);
 
   //ears
   fill(247, 162, 99);
-  ellipse(x + 8, y, 15, 15);
-  ellipse(x + 42, y, 15, 15);
+  ellipse(player.x + 8 - 50, player.y - 50, 15, 15);
+  ellipse(player.x + 42 - 50, player.y - 50, 15, 15);
 
   fill(245, 95, 175);
   beginShape();
-  vertex(x + 20, y + 33);
-  bezierVertex(x + 20, y + 43, x + 30, y + 43, x + 30, y + 33);
+  vertex(player.x + 20 - 50, player.y + 33 - 50);
+  bezierVertex(
+    player.x + 20 - 50,
+    player.y + 43 - 50,
+    player.x + 30 - 50,
+    player.y + 43 - 50,
+    player.x + 30 - 50,
+    player.y + 33 - 50
+  );
   endShape();
+  pop();
 }
 
 function startText() {
@@ -100,24 +124,11 @@ function level1on() {
   let levelOn = platforms1on;
   for (let i = 0; i < levelOn.length; i++) {
     fill(209, 133, 237);
-    rect(
-      levelOn[i].xPosition,
-      levelOn[i].yPosition,
-      levelOn[i].width,
-      levelOn[i].height
-    );
+    rect(levelOn[i].x, levelOn[i].y, levelOn[i].width, levelOn[i].height);
   }
-  let levelOff = platforms1off;
-  for (let i = 0; i < levelOff.length; i++) {
-    fill(255, 255, 255);
-    rect(
-      levelOff[i].xPosition,
-      levelOff[i].yPosition,
-      levelOff[i].width,
-      levelOff[i].height
-    );
-  }
-  theFinalStar(850, 470, 10, 20, 5);
+
+  platforms1on.visible = true;
+  platforms1off.visible = false;
 }
 
 function level1off() {
@@ -127,43 +138,13 @@ function level1off() {
   death();
   startText();
 
-  let levelOn = platforms1on;
-  for (let i = 0; i < levelOn.length; i++) {
-    fill(255, 255, 255);
-    rect(
-      levelOn[i].xPosition,
-      levelOn[i].yPosition,
-      levelOn[i].width,
-      levelOn[i].height
-    );
-  }
   let levelOff = platforms1off;
   for (let i = 0; i < levelOff.length; i++) {
     fill(99, 235, 137);
-    rect(
-      levelOff[i].xPosition,
-      levelOff[i].yPosition,
-      levelOff[i].width,
-      levelOff[i].height
-    );
+    rect(levelOff[i].x, levelOff[i].y, levelOff[i].width, levelOff[i].height);
   }
-  theFinalStar(850, 470, 10, 20, 5);
-}
-
-function theFinalStar(x, y, radius1, radius2, npoints) {
-  fill(255, 255, 255);
-  let angle = TWO_PI / npoints;
-  let halfAngle = angle / 2.0;
-  beginShape();
-  for (let a = 0; a < TWO_PI; a += angle) {
-    let sx = x + cos(a) * radius2;
-    let sy = y + sin(a) * radius2;
-    vertex(sx, sy);
-    sx = x + cos(a + halfAngle) * radius1;
-    sy = y + sin(a + halfAngle) * radius1;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
+  platforms1on.visible = false;
+  platforms1off.visible = true;
 }
 
 //death count
@@ -175,56 +156,26 @@ function death() {
   textFont("Impact");
   text("Deaths: " + deathCount, 60, 65, 100, 50);
 }
-
-function checkForCollision(x, y) {
-  let collisionIsDetected = false;
-  for (let i = 0; i < platforms1on.length; i++) {
-    if (collisionDetectorObject(x, y, platforms1on[i])) {
-      console.log("collision");
-      canJump = true;
-      characterY1 = platforms1on[i].yPosition - 50;
-      speed = 0;
-      collisionIsDetected = true;
-    }
-  }
-  return collisionIsDetected;
-}
-
-function checkForCollision2(x, y) {
-  let collisionIsDetected = false;
-  for (let i = 0; i < platforms1off.length; i++) {
-    if (collisionDetectorObject(x, y, platforms1off[i])) {
-      console.log("collision");
-      collisionIsDetected = true;
-    }
-  }
-  return collisionIsDetected;
-}
-
-function collisionDetectorObject(x, y, object) {
-  if (
-    x > object.xPosition &&
-    x < object.xPosition + object.width &&
-    y > object.yPosition - 50 &&
-    y < object.yPosition + object.height - 50
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+function detectCollision(x, y, object) {
+  return (
+    x > object.x &&
+    x < object.x + object.width &&
+    y > object.y &&
+    y < object.y + object.height
+  );
 }
 
 function draw() {
   clear();
 
-  tempCharacterX1 = characterX1;
-  tempCharacterY1 = characterY1;
+  let tempCharacterX1 = player.x;
+  let tempCharacterY1 = player.y;
 
   //basic movement
-  if (keyIsDown(38) && canJump) {
+  if (keyIsDown(38) && player.canJump) {
     //jumping
-    speed = -20;
-    canJump = false;
+    player.speedY = -20;
+    player.canJump = false;
   }
 
   if (keyIsDown(37)) {
@@ -235,8 +186,58 @@ function draw() {
   }
 
   //gravity
-  speed = speed + gravity;
-  tempCharacterY1 = tempCharacterY1 + speed;
+  player.speedY += gravity;
+  tempCharacterY1 += player.speedY;
+
+  /////////collisions
+  // detect vertical collision
+  let verticalCollisionDetected = false;
+
+  for (let platform of platforms1on) {
+    if (
+      platforms1on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms1off) {
+    if (
+      platforms1off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  if (verticalCollisionDetected) {
+    player.speedY = 0;
+    player.canJump = true;
+  } else {
+    player.y = tempCharacterY1;
+  }
+  // detect horizontal collision
+  let horizontalCollisionDetected = false;
+  for (let platform of platforms1on) {
+    if (detectCollision(tempCharacterX1, player.y, platform)) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms1off) {
+    if (detectCollision(tempCharacterX1, player.y, platform)) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of canvas) {
+    if (detectCollision(tempCharacterX1, player.y, platform)) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  if (!horizontalCollisionDetected) {
+    player.x = tempCharacterX1;
+  }
+  ///////////////the end of collisions
 
   if (tempCharacterX1 < 0) {
     tempCharacterX1 = 0;
@@ -244,35 +245,28 @@ function draw() {
   if (tempCharacterX1 + 50 > 900) {
     tempCharacterX1 = 900 - 50;
   }
-  const collisionIsDetected = checkForCollision(
-    tempCharacterX1,
-    tempCharacterY1
-  );
-  if (collisionIsDetected === false) {
-    characterY1 = tempCharacterY1;
-    characterX1 = tempCharacterX1;
-  }
+
   if (state === "start") {
     newGame(350, 250, 200, 100);
   }
   //level 11111111111111111111
   else if (state === "level1on") {
     level1on(0, 0);
-    character(characterX1, characterY1);
-    if (characterY1 > 550) {
+    character(player);
+    if (player.y > 550) {
       deathCount = deathCount + 1;
-      characterX1 = 100;
-      characterY1 = 300;
-      speed = 0;
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
     }
   } else if (state === "level1off") {
     level1off(0, 0);
-    character(characterX1, characterY1);
-    if (characterY1 > 550) {
+    character(player);
+    if (player.y > 550) {
       deathCount = deathCount + 1;
-      characterX1 = 100;
-      characterX1 = 300;
-      speed = 0;
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
     }
   }
 }
