@@ -4,8 +4,9 @@ let speed = 0;
 const gravity = 1;
 let characterX1 = 100;
 let characterY1 = 300;
-let deathCount = 0;
+let deathCount = -1;
 let canJump = true;
+let r = 0.0;
 
 //canvas
 let canvas = [
@@ -18,6 +19,46 @@ let platforms1on = [{ x: 0, y: 500, width: 400, height: 100, visible: false }];
 
 let platforms1off = [
   { x: 600, y: 500, width: 300, height: 100, visible: false },
+];
+
+//platforms level 22222
+let platforms2on = [
+  { x: 0, y: 500, width: 200, height: 100, visible: false },
+  { x: 600, y: 300, width: 200, height: 300, visible: false },
+];
+
+let platforms2off = [
+  { x: 300, y: 400, width: 200, height: 200, visible: false },
+];
+
+//platforms level 44444
+let platforms4on = [
+  { x: 0, y: 200, width: 100, height: 400, visible: false },
+
+  { x: 400, y: 400, width: 100, height: 300, visible: false },
+
+  { x: 800, y: 400, width: 100, height: 300, visible: false },
+];
+
+let platforms4off = [
+  { x: 200, y: 300, width: 100, height: 300, visible: false },
+
+  { x: 600, y: 500, width: 100, height: 300, visible: false },
+];
+
+//platforms level 55555
+let platforms5on = [
+  { x: 0, y: 500, width: 300, height: 100, visible: false },
+
+  { x: 300, y: 300, width: 300, height: 300, visible: false },
+
+  { x: 600, y: 100, width: 300, height: 500, visible: false },
+];
+
+let platforms5off = [
+  { x: 200, y: 400, width: 100, height: 100, visible: false },
+
+  { x: 500, y: 200, width: 100, height: 100, visible: false },
 ];
 
 //character object
@@ -110,6 +151,26 @@ function startText() {
   text(" SPACE change worlds", 340, 240, 300, 300);
 }
 
+function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
+  push();
+  translate(translateX, translateY);
+  rotate(r);
+  fill(255, 255, 255);
+  let angle = TWO_PI / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+  pop();
+}
+
 //level1
 //level1
 //level1
@@ -129,6 +190,8 @@ function level1on() {
 
   platforms1on.visible = true;
   platforms1off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 470);
 }
 
 function level1off() {
@@ -145,6 +208,52 @@ function level1off() {
   }
   platforms1on.visible = false;
   platforms1off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 470);
+}
+
+//level2
+//level2
+//level2
+
+function level2on() {
+  fill(237, 215, 245);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level2On = platforms2on;
+  for (let i = 0; i < level2On.length; i++) {
+    fill(209, 133, 237);
+    rect(level2On[i].x, level2On[i].y, level2On[i].width, level2On[i].height);
+  }
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = true;
+  platforms2off.visible = false;
+}
+
+function level2off() {
+  fill(237, 215, 245);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level2Off = platforms2off;
+  for (let i = 0; i < level2Off.length; i++) {
+    fill(209, 133, 237);
+    rect(
+      level2Off[i].x,
+      level2Off[i].y,
+      level2Off[i].width,
+      level2Off[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = true;
 }
 
 //death count
@@ -156,6 +265,8 @@ function death() {
   textFont("Impact");
   text("Deaths: " + deathCount, 60, 65, 100, 50);
 }
+
+//collision detection
 function detectCollision(x, y, object) {
   return (
     x > object.x &&
@@ -177,13 +288,15 @@ function draw() {
     player.speedY = -20;
     player.canJump = false;
   }
-
   if (keyIsDown(37)) {
     tempCharacterX1 = tempCharacterX1 - 6;
   }
   if (keyIsDown(39)) {
     tempCharacterX1 = tempCharacterX1 + 6;
   }
+
+  //star
+  r = r + 0.1;
 
   //gravity
   player.speedY += gravity;
@@ -211,6 +324,24 @@ function draw() {
       player.y = platform.y;
     }
   }
+  for (let platform of platforms2on) {
+    if (
+      platforms2on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms2off) {
+    if (
+      platforms2off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
   if (verticalCollisionDetected) {
     player.speedY = 0;
     player.canJump = true;
@@ -220,15 +351,38 @@ function draw() {
   // detect horizontal collision
   let horizontalCollisionDetected = false;
   for (let platform of platforms1on) {
-    if (detectCollision(tempCharacterX1, player.y, platform)) {
+    if (
+      platforms1on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
       horizontalCollisionDetected = true;
     }
   }
   for (let platform of platforms1off) {
-    if (detectCollision(tempCharacterX1, player.y, platform)) {
+    if (
+      platforms1off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
       horizontalCollisionDetected = true;
     }
   }
+  for (let platform of platforms2on) {
+    if (
+      platforms2on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms2off) {
+    if (
+      platforms2off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
       horizontalCollisionDetected = true;
@@ -245,6 +399,13 @@ function draw() {
   if (tempCharacterX1 + 50 > 900) {
     tempCharacterX1 = 900 - 50;
   }
+  //death count
+  if (player.y > 650) {
+    deathCount = deathCount + 1;
+    player.x = 100;
+    player.y = 300;
+    player.speedY = 0;
+  }
 
   if (state === "start") {
     newGame(350, 250, 200, 100);
@@ -253,8 +414,9 @@ function draw() {
   else if (state === "level1on") {
     level1on(0, 0);
     character(player);
-    if (player.y > 550) {
-      deathCount = deathCount + 1;
+    //level complete
+    if (tempCharacterX1 + 50 > 830 && tempCharacterY1 > 430) {
+      state = "level2on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -262,13 +424,23 @@ function draw() {
   } else if (state === "level1off") {
     level1off(0, 0);
     character(player);
-    if (player.y > 550) {
-      deathCount = deathCount + 1;
+    //level complete
+    if (tempCharacterX1 + 50 > 830 && tempCharacterY1 > 430) {
+      state = "level2on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
     }
+  } else if (state === "level2on") {
+    level2on(0, 0);
+    character(player);
+  } else if (state === "level2off") {
+    level2off(0, 0);
+    character(player);
   }
+
+  fill(255, 255, 255);
+  rect(0, 600, 900, 200);
 }
 
 function mouseClicked() {
@@ -293,5 +465,17 @@ function keyPressed() {
     state = "level1off";
   } else if (keyCode === 32 && state === "level1off") {
     state = "level1on";
+  } else if (keyCode === 32 && state === "level2on") {
+    state = "level2off";
+  } else if (keyCode === 32 && state === "level2off") {
+    state = "level2on";
+  } else if (keyCode === 32 && state === "level4on") {
+    state = "level4off";
+  } else if (keyCode === 32 && state === "level4off") {
+    state = "level4on";
+  } else if (keyCode === 32 && state === "level5on") {
+    state = "level5off";
+  } else if (keyCode === 32 && state === "level5off") {
+    state = "level5on";
   }
 }
