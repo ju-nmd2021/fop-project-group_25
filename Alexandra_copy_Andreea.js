@@ -1073,6 +1073,7 @@ function draw() {
       }
     }
   }
+
   ////////////////////////////////////////////////////////////////////////
   else if (state === "level5off") {
     level5off(); //defining the canvas and platforms and stuff
@@ -1111,7 +1112,7 @@ function mouseClicked() {
     mouseY >= 250 &&
     mouseY <= 335
   ) {
-    state = "level4on";
+    state = "level3on";
     speed = 0;
     characterX1 = 100;
     characterY1 = 450;
