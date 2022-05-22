@@ -8,6 +8,22 @@ let deathCount = -1;
 let canJump = true;
 let r = 0.0;
 
+const starLvl3 = {
+  x: 750,
+  y: 100,
+  radius1: 10,
+  radius2: 20,
+  nPoints: 5,
+};
+
+const starLvl4 = {
+  x: 720,
+  y: 470,
+  radius1: 10,
+  radius2: 20,
+  nPoints: 5,
+};
+
 //canvas
 let canvas = [
   { x: -10, y: -10, width: 30, height: 610 },
@@ -29,6 +45,17 @@ let platforms2on = [
 
 let platforms2off = [
   { x: 300, y: 400, width: 200, height: 200, visible: false },
+];
+
+//platforms level 33333
+
+let platforms3on = [
+  { x: 100, y: 400, width: 250, height: 200, visible: false },
+  { x: 600, y: 150, width: 150, height: 150, visible: false },
+];
+
+let platforms3off = [
+  { x: 350, y: 300, width: 200, height: 50, visible: false },
 ];
 
 //platforms level 44444
@@ -61,6 +88,19 @@ let platforms5off = [
   { x: 500, y: 200, width: 100, height: 100, visible: false },
 ];
 
+//platforms level 66666
+
+let platforms6on = [
+  { x: 150, y: 100, width: 600, height: 30, visible: false },
+  { x: 150, y: 300, width: 600, height: 30, visible: false },
+  { x: 150, y: 500, width: 600, height: 30, visible: false },
+];
+
+let platforms6off = [
+  { x: 150, y: 200, width: 600, height: 30, visible: false },
+  { x: 150, y: 400, width: 600, height: 30, visible: false },
+];
+
 //character object
 const player = {
   x: 100,
@@ -88,7 +128,7 @@ function newGame(x, y, w, h) {
 
   fill(255, 0, 0);
   textSize(80);
-  textFont("Impact");
+  textFont("Rubik Bubbles");
   text("R", x, y - h / 1.7);
 
   fill(0, 255, 0);
@@ -264,6 +304,61 @@ function level2off() {
   pop();
 }
 
+// level3
+
+function level3on() {
+  fill(240, 201, 175);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level3On = platforms3on;
+  for (let i = 0; i < level3On.length; i++) {
+    fill(241, 158, 104);
+    rect(level3On[i].x, level3On[i].y, level3On[i].width, level3On[i].height);
+  }
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = true;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 850, 100);
+}
+
+function level3off() {
+  push();
+  fill(165, 194, 237);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level3Off = platforms3off;
+  for (let i = 0; i < level3Off.length; i++) {
+    fill(109, 160, 234);
+    rect(
+      level3Off[i].x,
+      level3Off[i].y,
+      level3Off[i].width,
+      level3Off[i].height
+    );
+  }
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = true;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 750, 100);
+  pop();
+}
+
 function level4on() {
   push();
   fill(241, 179, 185);
@@ -376,6 +471,72 @@ function level5off() {
   pop();
 }
 
+//level6
+function level6on() {
+  push();
+  fill(206, 179, 241);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level6On = platforms6on;
+  for (let i = 0; i < level6On.length; i++) {
+    fill(161, 104, 233);
+    rect(level6On[i].x, level6On[i].y, level6On[i].width, level6On[i].height);
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = true;
+  platforms6off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 720, 470);
+  pop();
+}
+
+function level6off() {
+  push();
+  fill(241, 237, 179);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level6Off = platforms6off;
+  for (let i = 0; i < level6Off.length; i++) {
+    fill(229, 222, 105);
+    rect(
+      level6Off[i].x,
+      level6Off[i].y,
+      level6Off[i].width,
+      level6Off[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = false;
+  platforms6off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 720, 470);
+  pop();
+}
+
 //death count
 function death() {
   fill(231, 231, 231);
@@ -462,6 +623,24 @@ function draw() {
       player.y = platform.y;
     }
   }
+  for (let platform of platforms3on) {
+    if (
+      platforms3on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms3off) {
+    if (
+      platforms3off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
   for (let platform of platforms4on) {
     if (
       platforms4on.visible === true &&
@@ -492,6 +671,24 @@ function draw() {
   for (let platform of platforms5off) {
     if (
       platforms5off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms6on) {
+    if (
+      platforms6on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms6off) {
+    if (
+      platforms6off.visible === true &&
       detectCollision(player.x, tempCharacterY1, platform)
     ) {
       verticalCollisionDetected = true;
@@ -538,6 +735,23 @@ function draw() {
       horizontalCollisionDetected = true;
     }
   }
+
+  for (let platform of platforms3on) {
+    if (
+      platforms3on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms3off) {
+    if (
+      platforms3off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
   for (let platform of platforms4on) {
     if (
       platforms4on.visible === true &&
@@ -570,6 +784,22 @@ function draw() {
       horizontalCollisionDetected = true;
     }
   }
+  for (let platform of platforms6on) {
+    if (
+      platforms6on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms6off) {
+    if (
+      platforms6off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
 
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
@@ -594,8 +824,12 @@ function draw() {
       state === "level1off" ||
       state === "level2on" ||
       state === "level2off" ||
+      state === "level3on" ||
+      state === "level3off" ||
       state === "level5on" ||
-      state === "level5off"
+      state === "level5off" ||
+      state === "level6on" ||
+      state === "level6off"
     ) {
       deathCount = deathCount + 1;
       player.x = 100;
@@ -642,7 +876,7 @@ function draw() {
       tempCharacterY1 > 50 &&
       tempCharacterY1 < 150
     ) {
-      state = "level4on";
+      state = "level3on";
       player.x = 50;
       player.y = 0;
       player.speedY = 0;
@@ -656,10 +890,30 @@ function draw() {
       tempCharacterY1 > 50 &&
       tempCharacterY1 < 150
     ) {
-      state = "level4on";
+      state = "level3on";
       player.x = 50;
       player.y = 0;
       player.speedY = 0;
+    }
+  } else if (state === "level3on") {
+    level3on(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+      state = "level4on";
+      characterX1 = 170;
+      characterY1 = 100;
+      speed = 0;
+    }
+  } else if (state === "level3off") {
+    level3off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+      state = "level4on";
+      characterX1 = 170;
+      characterY1 = 100;
+      speed = 0;
     }
   } else if (state === "level4on") {
     level4on(0, 0);
@@ -692,8 +946,28 @@ function draw() {
   } else if (state === "level5on") {
     level5on(0, 0);
     character(player.x, player.y);
+    //level complete
+    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+      state = "level6on";
+      characterX1 = 170;
+      characterY1 = 100;
+      speed = 0;
+    }
   } else if (state === "level5off") {
     level5off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+      state = "level6on";
+      characterX1 = 170;
+      characterY1 = 100;
+      speed = 0;
+    }
+  } else if (state === "level6on") {
+    level6on(0, 0);
+    character(player.x, player.y);
+  } else if (state === "level6off") {
+    level6off(0, 0);
     character(player.x, player.y);
   }
 
@@ -727,6 +1001,10 @@ function keyPressed() {
     state = "level2off";
   } else if (keyCode === 32 && state === "level2off") {
     state = "level2on";
+  } else if (keyCode === 32 && state === "level3on") {
+    state = "level3off";
+  } else if (keyCode === 32 && state === "level3off") {
+    state = "level3on";
   } else if (keyCode === 32 && state === "level4on") {
     state = "level4off";
   } else if (keyCode === 32 && state === "level4off") {
