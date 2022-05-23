@@ -8,22 +8,6 @@ let deathCount = -1;
 let canJump = true;
 let r = 0.0;
 
-const starLvl3 = {
-  x: 750,
-  y: 100,
-  radius1: 10,
-  radius2: 20,
-  nPoints: 5,
-};
-
-const starLvl4 = {
-  x: 720,
-  y: 470,
-  radius1: 10,
-  radius2: 20,
-  nPoints: 5,
-};
-
 //canvas
 let canvas = [
   { x: -10, y: -10, width: 30, height: 610 },
@@ -109,6 +93,29 @@ let platforms7on = [
 ];
 
 let platforms7off = [{ x: 0, y: 500, width: 900, height: 100, visible: false }];
+//platforms level 77777
+
+let platforms8on = [
+  //vertial
+  { x: 50, y: 200, width: 30, height: 300, visible: false },
+  { x: 350, y: 200, width: 30, height: 300, visible: false },
+  { x: 650, y: 200, width: 30, height: 300, visible: false },
+
+  { x: 250, y: 200, width: 30, height: 300, visible: false },
+  { x: 550, y: 200, width: 30, height: 300, visible: false },
+  { x: 850, y: 200, width: 30, height: 300, visible: false },
+
+  //horizotal
+  { x: 50, y: 200, width: 200, height: 30, visible: false },
+  { x: 350, y: 200, width: 200, height: 30, visible: false },
+  { x: 650, y: 200, width: 200, height: 30, visible: false },
+
+  { x: 50, y: 470, width: 200, height: 30, visible: false },
+  { x: 350, y: 470, width: 200, height: 30, visible: false },
+  { x: 650, y: 470, width: 200, height: 30, visible: false },
+];
+
+let platforms8off = [];
 
 //character object
 const player = {
@@ -616,6 +623,74 @@ function level7off() {
   pop();
 }
 
+//level 8
+function level8on() {
+  let level8On = platforms8on;
+  for (let i = 0; i < level8On.length; i++) {
+    fill(161, 104, 233);
+    rect(level8On[i].x, level8On[i].y, level8On[i].width, level8On[i].height);
+
+    platforms1on.visible = false;
+    platforms1off.visible = false;
+    platforms2on.visible = false;
+    platforms2off.visible = false;
+    platforms3on.visible = false;
+    platforms3off.visible = false;
+    platforms4on.visible = false;
+    platforms4off.visible = false;
+    platforms5on.visible = false;
+    platforms5off.visible = false;
+    platforms6on.visible = false;
+    platforms6off.visible = false;
+    platforms7on.visible = false;
+    platforms7off.visible = false;
+    platforms8on.visible = true;
+    platforms8off.visible = false;
+
+    theFinalStar(0, 0, 10, 20, 5, 720, 260);
+    pop();
+  }
+}
+
+function level8off() {
+  push();
+  fill(241, 237, 179);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level8Off = platforms8off;
+  for (let i = 0; i < level8Off.length; i++) {
+    fill(229, 222, 105);
+    rect(
+      level8Off[i].x,
+      level8Off[i].y,
+      level8Off[i].width,
+      level8Off[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = false;
+  platforms6off.visible = false;
+  platforms7on.visible = false;
+  platforms7off.visible = false;
+  platforms8on.visible = false;
+  platforms8off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 720, 260);
+  pop();
+}
+
 //death count
 function death() {
   fill(231, 231, 231);
@@ -792,6 +867,24 @@ function draw() {
       player.y = platform.y;
     }
   }
+  for (let platform of platforms8on) {
+    if (
+      platforms8on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms8off) {
+    if (
+      platforms8off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
   if (verticalCollisionDetected) {
     player.speedY = 0;
     player.canJump = true;
@@ -913,6 +1006,22 @@ function draw() {
       horizontalCollisionDetected = true;
     }
   }
+  for (let platform of platforms8on) {
+    if (
+      platforms8on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms8off) {
+    if (
+      platforms8off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
 
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
@@ -940,7 +1049,9 @@ function draw() {
       state === "level5on" ||
       state === "level5off" ||
       state === "level7on" ||
-      state === "level7off"
+      state === "level7off" ||
+      state === "level8on" ||
+      state === "level8off"
     ) {
       deathCount = deathCount + 1;
       player.x = 100;
@@ -973,7 +1084,7 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
-      state = "level7on";
+      state = "level8on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -983,7 +1094,7 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
-      state = "level7on";
+      state = "level8on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -1020,15 +1131,11 @@ function draw() {
     level3on(0, 0);
     character(player.x, player.y);
     //level complete
-<<<<<<< Updated upstream
-    if (characterX1 + 50 > 850 && characterY1 + 50 > 100) {
-=======
     if (
       tempCharacterX1 + 50 > 830 &&
       tempCharacterY1 > 50 &&
       tempCharacterY1 < 150
     ) {
->>>>>>> Stashed changes
       state = "level4on";
       player.x = 50;
       player.y = 0;
@@ -1138,8 +1245,8 @@ function draw() {
     //level complete
     if (
       tempCharacterX1 + 50 > 720 &&
-      tempCharacterY1 > 0 &&
-      tempCharacterY1 < 260
+      tempCharacterY1 > 250 &&
+      tempCharacterY1 < 320
     ) {
       state = "level8on";
       player.x = 100;
@@ -1152,10 +1259,38 @@ function draw() {
     //level complete
     if (
       tempCharacterX1 + 50 > 720 &&
-      tempCharacterY1 > 0 &&
-      tempCharacterY1 < 260
+      tempCharacterY1 > 250 &&
+      tempCharacterY1 < 320
     ) {
       state = "level8on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
+  } else if (state === "level8on") {
+    level8on(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 720 &&
+      tempCharacterY1 > 250 &&
+      tempCharacterY1 < 320
+    ) {
+      state = "end";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
+  } else if (state === "level8off") {
+    level8off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 720 &&
+      tempCharacterY1 > 250 &&
+      tempCharacterY1 < 320
+    ) {
+      state = "end";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -1212,5 +1347,9 @@ function keyPressed() {
     state = "level7off";
   } else if (keyCode === 32 && state === "level7off") {
     state = "level7on";
+  } else if (keyCode === 32 && state === "level8on") {
+    state = "level8off";
+  } else if (keyCode === 32 && state === "level8off") {
+    state = "level8on";
   }
 }
