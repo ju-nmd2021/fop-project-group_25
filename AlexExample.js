@@ -355,7 +355,7 @@ function level3off() {
   platforms4on.visible = false;
   platforms4off.visible = false;
 
-  theFinalStar(0, 0, 10, 20, 5, 750, 100);
+  theFinalStar(0, 0, 10, 20, 5, 850, 100);
   pop();
 }
 
@@ -899,7 +899,7 @@ function draw() {
     level3on(0, 0);
     character(player.x, player.y);
     //level complete
-    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+    if (characterX1 + 50 > 850 && characterY1 + 50 > 100) {
       state = "level4on";
       characterX1 = 170;
       characterY1 = 100;
