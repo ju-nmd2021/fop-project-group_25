@@ -101,6 +101,15 @@ let platforms6off = [
   { x: 150, y: 400, width: 600, height: 30, visible: false },
 ];
 
+//platforms level 77777
+
+let platforms7on = [
+  { x: 0, y: 300, width: 900, height: 30, visible: false },
+  { x: 450, y: 0, width: 30, height: 330, visible: false },
+];
+
+let platforms7off = [{ x: 0, y: 500, width: 900, height: 100, visible: false }];
+
 //character object
 const player = {
   x: 100,
@@ -128,7 +137,7 @@ function newGame(x, y, w, h) {
 
   fill(255, 0, 0);
   textSize(80);
-  textFont("Rubik Bubbles");
+  textFont("Impact");
   text("R", x, y - h / 1.7);
 
   fill(0, 255, 0);
@@ -537,6 +546,76 @@ function level6off() {
   pop();
 }
 
+//level7
+function level7on() {
+  push();
+  fill(206, 179, 241);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level7On = platforms7on;
+  for (let i = 0; i < level7On.length; i++) {
+    fill(161, 104, 233);
+    rect(level7On[i].x, level7On[i].y, level7On[i].width, level7On[i].height);
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = false;
+  platforms6off.visible = false;
+  platforms7on.visible = true;
+  platforms7off.visible = false;
+
+  theFinalStar(0, 0, 10, 20, 5, 720, 260);
+  pop();
+}
+
+function level7off() {
+  push();
+  fill(241, 237, 179);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level7Off = platforms7off;
+  for (let i = 0; i < level7Off.length; i++) {
+    fill(229, 222, 105);
+    rect(
+      level7Off[i].x,
+      level7Off[i].y,
+      level7Off[i].width,
+      level7Off[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = false;
+  platforms6off.visible = false;
+  platforms7on.visible = false;
+  platforms7off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 720, 260);
+  pop();
+}
+
 //death count
 function death() {
   fill(231, 231, 231);
@@ -695,6 +774,24 @@ function draw() {
       player.y = platform.y;
     }
   }
+  for (let platform of platforms7on) {
+    if (
+      platforms7on.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
+  for (let platform of platforms7off) {
+    if (
+      platforms7off.visible === true &&
+      detectCollision(player.x, tempCharacterY1, platform)
+    ) {
+      verticalCollisionDetected = true;
+      player.y = platform.y;
+    }
+  }
   if (verticalCollisionDetected) {
     player.speedY = 0;
     player.canJump = true;
@@ -800,6 +897,22 @@ function draw() {
       horizontalCollisionDetected = true;
     }
   }
+  for (let platform of platforms7on) {
+    if (
+      platforms7on.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
+  for (let platform of platforms7off) {
+    if (
+      platforms7off.visible === true &&
+      detectCollision(tempCharacterX1, player.y, platform)
+    ) {
+      horizontalCollisionDetected = true;
+    }
+  }
 
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
@@ -824,12 +937,10 @@ function draw() {
       state === "level1off" ||
       state === "level2on" ||
       state === "level2off" ||
-      state === "level3on" ||
-      state === "level3off" ||
       state === "level5on" ||
       state === "level5off" ||
-      state === "level6on" ||
-      state === "level6off"
+      state === "level7on" ||
+      state === "level7off"
     ) {
       deathCount = deathCount + 1;
       player.x = 100;
@@ -838,6 +949,16 @@ function draw() {
     } else if (state === "level4on" || state === "level4off") {
       deathCount = deathCount + 1;
       player.x = 50;
+      player.y = 0;
+      player.speedY = 0;
+    } else if (state === "level3on" || state === "level3off") {
+      deathCount = deathCount + 1;
+      player.x = 170;
+      player.y = 200;
+      player.speedY = 0;
+    } else if (state === "level6on" || state === "level6off") {
+      deathCount = deathCount + 1;
+      player.x = 450;
       player.y = 0;
       player.speedY = 0;
     }
@@ -852,7 +973,7 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
-      state = "level2on";
+      state = "level7on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -862,7 +983,7 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
-      state = "level2on";
+      state = "level7on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -877,8 +998,8 @@ function draw() {
       tempCharacterY1 < 150
     ) {
       state = "level3on";
-      player.x = 50;
-      player.y = 0;
+      player.x = 150;
+      player.y = 300;
       player.speedY = 0;
     }
   } else if (state === "level2off") {
@@ -891,29 +1012,41 @@ function draw() {
       tempCharacterY1 < 150
     ) {
       state = "level3on";
-      player.x = 50;
-      player.y = 0;
+      player.x = 150;
+      player.y = 300;
       player.speedY = 0;
     }
   } else if (state === "level3on") {
     level3on(0, 0);
     character(player.x, player.y);
     //level complete
+<<<<<<< Updated upstream
     if (characterX1 + 50 > 850 && characterY1 + 50 > 100) {
+=======
+    if (
+      tempCharacterX1 + 50 > 830 &&
+      tempCharacterY1 > 50 &&
+      tempCharacterY1 < 150
+    ) {
+>>>>>>> Stashed changes
       state = "level4on";
-      characterX1 = 170;
-      characterY1 = 100;
-      speed = 0;
+      player.x = 50;
+      player.y = 0;
+      player.speedY = 0;
     }
   } else if (state === "level3off") {
     level3off(0, 0);
     character(player.x, player.y);
     //level complete
-    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+    if (
+      tempCharacterX1 + 50 > 850 &&
+      tempCharacterY1 > 50 &&
+      tempCharacterY1 < 150
+    ) {
       state = "level4on";
-      characterX1 = 170;
-      characterY1 = 100;
-      speed = 0;
+      player.x = 50;
+      player.y = 0;
+      player.speedY = 0;
     }
   } else if (state === "level4on") {
     level4on(0, 0);
@@ -947,28 +1080,86 @@ function draw() {
     level5on(0, 0);
     character(player.x, player.y);
     //level complete
-    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+    if (
+      tempCharacterX1 + 50 > 850 &&
+      tempCharacterY1 > 0 &&
+      tempCharacterY1 < 100
+    ) {
       state = "level6on";
-      characterX1 = 170;
-      characterY1 = 100;
-      speed = 0;
+      player.x = 450;
+      player.y = 0;
+      player.speedY = 0;
     }
   } else if (state === "level5off") {
     level5off(0, 0);
     character(player.x, player.y);
     //level complete
-    if (characterX1 + 50 > starLvl3.x && characterY1 + 50 > starLvl3.y) {
+    if (
+      tempCharacterX1 + 50 > 850 &&
+      tempCharacterY1 > 0 &&
+      tempCharacterY1 < 100
+    ) {
       state = "level6on";
-      characterX1 = 170;
-      characterY1 = 100;
-      speed = 0;
+      player.x = 450;
+      player.y = 0;
+      player.speedY = 0;
     }
   } else if (state === "level6on") {
     level6on(0, 0);
     character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 700 &&
+      tempCharacterY1 > 470 &&
+      tempCharacterY1 < 550
+    ) {
+      state = "level7on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
   } else if (state === "level6off") {
     level6off(0, 0);
     character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 700 &&
+      tempCharacterY1 > 470 &&
+      tempCharacterY1 < 550
+    ) {
+      state = "level7on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
+  } else if (state === "level7on") {
+    level7on(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 720 &&
+      tempCharacterY1 > 0 &&
+      tempCharacterY1 < 260
+    ) {
+      state = "level8on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
+  } else if (state === "level7off") {
+    level7off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 720 &&
+      tempCharacterY1 > 0 &&
+      tempCharacterY1 < 260
+    ) {
+      state = "level8on";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+    }
   }
 
   fill(255, 255, 255);
@@ -1013,5 +1204,13 @@ function keyPressed() {
     state = "level5off";
   } else if (keyCode === 32 && state === "level5off") {
     state = "level5on";
+  } else if (keyCode === 32 && state === "level6on") {
+    state = "level6off";
+  } else if (keyCode === 32 && state === "level6off") {
+    state = "level6on";
+  } else if (keyCode === 32 && state === "level7on") {
+    state = "level7off";
+  } else if (keyCode === 32 && state === "level7off") {
+    state = "level7on";
   }
 }
