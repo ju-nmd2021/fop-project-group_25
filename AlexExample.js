@@ -89,7 +89,6 @@ let platforms5off = [
 ];
 
 //platforms level 66666
-
 let platforms6on = [
   { x: 150, y: 100, width: 600, height: 30, visible: false },
   { x: 150, y: 300, width: 600, height: 30, visible: false },
