@@ -13,7 +13,6 @@ let audioStar = new Audio("star.mp3");
 let audioDeath = new Audio("death.mp3");
 let audioWin = new Audio("win.mp3");
 
-// audio.play();
 // source of the code:https://github.com/processing/p5.js/wiki/Positioning-your-canvas
 function setup() {
   frameRate(30);
@@ -182,18 +181,18 @@ function controls() {
   fill(31, 31, 31);
   rect(0, 0, 900, 600);
   fill(255, 255, 255);
-  textSize(30);
-  textFont("Helvetica");
-  text("MOVEMENT", 360, 100, 300, 300);
+  textSize(40);
+  textFont("Michroma");
+  text("MOVEMENT", 140, 150, 300, 300);
 
   textSize(20);
-  text(" < go left", 400, 150, 300, 300);
+  text(" PRESS  LEFT  ARROW  TO  GO  LEFT ", 140, 230, 900, 300);
 
-  text(" > go right", 400, 180, 300, 300);
+  text(" PRESS RIGHT ARROW TO GO RIGHT ", 140, 270, 900, 300);
 
-  text(" ^ jump", 400, 210, 300, 300);
+  text(" PRESS UP ARROW TO JUMP ", 140, 320, 900, 500);
 
-  text(" SPACE change worlds", 340, 240, 300, 300);
+  text(" PRESS SPACE BAR TO CHANGE THE WORLDS", 140, 370, 900, 300);
 }
 
 function goBack() {
@@ -805,11 +804,11 @@ function end(x, y, w, h) {
 //death count
 function death() {
   fill(255, 255, 255);
-  rect(50, 50, 110, 50);
+  // rect(50, 50, 110, 50);
   fill(0, 0, 0);
   textSize(20);
   textFont("Impact");
-  text("Deaths: " + deathCount, 60, 65, 100, 50);
+  text("Deaths: " + deathCount, 30, 65, 100, 50);
 }
 
 //collision detection
