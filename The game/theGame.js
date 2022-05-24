@@ -179,7 +179,9 @@ function newGame(x, y, w, h) {
 }
 // control screen starts here
 function controls() {
-  fill(0, 0, 0);
+  fill(31, 31, 31);
+  rect(0, 0, 900, 600);
+  fill(255, 255, 255);
   textSize(30);
   textFont("Helvetica");
   text("MOVEMENT", 360, 100, 300, 300);
@@ -192,6 +194,15 @@ function controls() {
   text(" ^ jump", 400, 210, 300, 300);
 
   text(" SPACE change worlds", 340, 240, 300, 300);
+}
+
+function goBack() {
+  fill(234, 114, 95);
+  rect(30, 30, 30, 30);
+  fill(0, 0, 0);
+  textFont("Helvetica");
+  textSize(20);
+  text("X", 38, 53);
 }
 
 //character
@@ -228,19 +239,15 @@ function character(object) {
 }
 
 function startText() {
-  fill(0, 0, 0);
-  textSize(30);
-  textFont("Helvetica");
-  text("MOVEMENT", 360, 100, 300, 300);
-
-  textSize(20);
-  text(" < go left", 400, 150, 300, 300);
-
-  text(" > go right", 400, 180, 300, 300);
-
-  text(" ^ jump", 400, 210, 300, 300);
-
-  text(" SPACE change worlds", 340, 240, 300, 300);
+  // fill(0, 0, 0);
+  // textSize(30);
+  // textFont("Helvetica");
+  // text("MOVEMENT", 360, 100, 300, 300);
+  // textSize(20);
+  // text(" < go left", 400, 150, 300, 300);
+  // text(" > go right", 400, 180, 300, 300);
+  // text(" ^ jump", 400, 210, 300, 300);
+  // text(" SPACE change worlds", 340, 240, 300, 300);
 }
 
 function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
@@ -791,7 +798,7 @@ function end(x, y, w, h) {
 
 //death count
 function death() {
-  fill(231, 231, 231);
+  fill(255, 255, 255);
   rect(50, 50, 110, 50);
   fill(0, 0, 0);
   textSize(20);
@@ -1186,6 +1193,7 @@ function draw() {
     newGame(350, 250, 200, 100);
   } else if (state === "controls") {
     controls();
+    goBack();
   }
   //level 11111111111111111111
   else if (state === "level1on") {
@@ -1454,8 +1462,17 @@ function mouseClicked() {
     mouseY >= 470 &&
     mouseY <= 535
   ) {
-    state === "controls";
+    state = "controls";
+  } else if (
+    state === "controls" &&
+    mouseX >= 30 &&
+    mouseX <= 60 &&
+    mouseY >= 30 &&
+    mouseY <= 60
+  ) {
+    state = "start";
   }
+
   if (
     state === "end" &&
     mouseX >= 350 &&
@@ -1508,11 +1525,11 @@ function keyPressed() {
   }
 }
 
-rect(x - 50, y + 140, w + 100, h - 35);
+// rect(x - 50, y + 140, w + 100, h - 35);
 
-rect(x - 50, y + 220, w + 100, h - 35);
+// rect(x - 50, y + 220, w + 100, h - 35);
 
-newGame(350, 250, 200, 100);
+// newGame(350, 250, 200, 100);
 
 // 300, 390, 300, 65
 // 300, 470, 300, 65
