@@ -275,15 +275,18 @@ function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
 //level1
 
 function level1on() {
-  fill(237, 215, 245);
+  fill(220, 220, 220);
   rect(0, 0, 900, 600);
 
   death();
   startText();
 
+  fill(230, 230, 230);
+  rect(600, 500, 300, 100);
+
   let levelOn = platforms1on;
   for (let i = 0; i < levelOn.length; i++) {
-    fill(209, 133, 237);
+    fill(255, 255, 255);
     rect(levelOn[i].x, levelOn[i].y, levelOn[i].width, levelOn[i].height);
   }
   platforms1on.visible = true;
@@ -307,15 +310,18 @@ function level1on() {
 }
 
 function level1off() {
-  fill(195, 247, 210);
+  fill(50, 50, 50);
   rect(0, 0, 900, 600);
 
   death();
   startText();
 
+  fill(55, 55, 55);
+  rect(0, 500, 400, 100);
+
   let levelOff = platforms1off;
   for (let i = 0; i < levelOff.length; i++) {
-    fill(99, 235, 137);
+    fill(0, 0, 0);
     rect(levelOff[i].x, levelOff[i].y, levelOff[i].width, levelOff[i].height);
   }
   platforms1on.visible = false;
@@ -394,14 +400,15 @@ function level2off() {
 // level3
 
 function level3on() {
-  fill(163, 194, 238);
+  push();
+  fill(238, 176, 233);
   rect(0, 0, 900, 600);
 
   death();
 
   let level3On = platforms3on;
   for (let i = 0; i < level3On.length; i++) {
-    fill(111, 100, 232);
+    fill(232, 100, 221);
     rect(level3On[i].x, level3On[i].y, level3On[i].width, level3On[i].height);
   }
   platforms1on.visible = false;
@@ -417,15 +424,14 @@ function level3on() {
 }
 
 function level3off() {
-  push();
-  fill(238, 176, 233);
+  fill(163, 194, 238);
   rect(0, 0, 900, 600);
 
   death();
 
   let level3Off = platforms3off;
   for (let i = 0; i < level3Off.length; i++) {
-    fill(232, 100, 221);
+    fill(111, 100, 232);
     rect(
       level3Off[i].x,
       level3Off[i].y,
@@ -1381,7 +1387,7 @@ function draw() {
     ) {
       state = "level8on";
       player.x = 180;
-      player.y = 300;
+      player.y = 200;
       player.speedY = 0;
       audioStar.play();
     }
@@ -1396,7 +1402,7 @@ function draw() {
     ) {
       state = "level8on";
       player.x = 180;
-      player.y = 300;
+      player.y = 200;
       player.speedY = 0;
       audioStar.play();
     }
@@ -1485,7 +1491,7 @@ function mouseClicked() {
     player.speedY = 0;
     tempCharacterX1 = 100;
     tempCharacterY1 = 450;
-    deathCount = 0;
+    deathCount = -1;
   }
 }
 
