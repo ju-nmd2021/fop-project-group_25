@@ -8,6 +8,11 @@ let deathCount = -1;
 let canJump = true;
 let r = 0.0; // rotation of the star
 let audio = new Audio("music.mp3");
+let audioJump = new Audio("jump.mp3");
+let audioStar = new Audio("star.mp3");
+let audioDeath = new Audio("death.mp3");
+let audioWin = new Audio("win.mp3");
+
 // audio.play();
 // source of the code:https://github.com/processing/p5.js/wiki/Positioning-your-canvas
 function setup() {
@@ -142,27 +147,27 @@ function newGame(x, y, w, h) {
   rect(0, 0, 900, 600);
 
   fill(232, 232, 232);
-  rect(x, y, w, h - 15);
+  rect(x, y + 200, w, h - 15);
 
   fill(0, 0, 0);
   textSize(40);
   textFont("Impact");
-  text("NEW GAME", x + w / 12, y + h / 1.7);
+  text("NEW GAME", x + w / 12, y + h + 270 / 1.7);
 
-  fill(255, 0, 0);
-  textSize(80);
-  textFont("Impact");
-  text("R", x, y - h / 1.7);
+  fill(234, 114, 95);
+  textSize(300);
+  textFont("Rubik Bubbles");
+  text("R", x - 250, y - h + 300 / 1.7);
 
-  fill(0, 255, 0);
-  textSize(80);
-  textFont("Impact");
-  text("G", x + 80, y - h / 1.7);
+  fill(95, 234, 134);
+  textSize(300);
+  textFont("Rubik Bubbles");
+  text("G", x + 80 - 100, y - h + 300 / 1.7);
 
-  fill(0, 0, 255);
-  textSize(80);
-  textFont("Impact");
-  text("B", x + 160, y - h / 1.7);
+  fill(95, 195, 234);
+  textSize(300);
+  textFont("Rubik Bubbles");
+  text("B", x + 160 + 50, y - h + 300 / 1.7);
 }
 
 //character
@@ -791,6 +796,7 @@ function draw() {
     //jumping
     player.speedY = -20;
     player.canJump = false;
+    audioJump.play();
   }
   if (keyIsDown(37)) {
     tempCharacterX1 = tempCharacterX1 - 6;
@@ -1120,26 +1126,31 @@ function draw() {
       state === "level7on" ||
       state === "level7off"
     ) {
+      audioDeath.play();
       deathCount = deathCount + 1;
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
     } else if (state === "level4on" || state === "level4off") {
+      audioDeath.play();
       deathCount = deathCount + 1;
       player.x = 50;
       player.y = 0;
       player.speedY = 0;
     } else if (state === "level3on" || state === "level3off") {
+      audioDeath.play();
       deathCount = deathCount + 1;
       player.x = 130;
       player.y = 300;
       player.speedY = 0;
     } else if (state === "level6on" || state === "level6off") {
+      audioDeath.play();
       deathCount = deathCount + 1;
       player.x = 200;
       player.y = 0;
       player.speedY = 0;
     } else if (state === "level8on" || state === "level8off") {
+      audioDeath.play();
       deathCount = deathCount + 1;
       player.x = 180;
       player.y = 300;
@@ -1154,6 +1165,7 @@ function draw() {
   else if (state === "level1on") {
     level1on(0, 0);
     character(player.x, player.y);
+    audio.volume = 0.1;
     audio.play();
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
@@ -1161,6 +1173,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level1off") {
     level1off(0, 0);
@@ -1171,6 +1184,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level2on") {
     level2on(0, 0);
@@ -1185,6 +1199,7 @@ function draw() {
       player.x = 130;
       player.y = 200;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level2off") {
     level2off(0, 0);
@@ -1199,6 +1214,7 @@ function draw() {
       player.x = 130;
       player.y = 200;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level3on") {
     level3on(0, 0);
@@ -1213,6 +1229,7 @@ function draw() {
       player.x = 50;
       player.y = 0;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level3off") {
     level3off(0, 0);
@@ -1227,6 +1244,7 @@ function draw() {
       player.x = 50;
       player.y = 0;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level4on") {
     level4on(0, 0);
@@ -1241,6 +1259,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level4off") {
     level4off(0, 0);
@@ -1255,6 +1274,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level5on") {
     level5on(0, 0);
@@ -1269,6 +1289,7 @@ function draw() {
       player.x = 180;
       player.y = 0;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level5off") {
     level5off(0, 0);
@@ -1283,6 +1304,7 @@ function draw() {
       player.x = 180;
       player.y = 0;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level6on") {
     level6on(0, 0);
@@ -1297,6 +1319,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level6off") {
     level6off(0, 0);
@@ -1311,6 +1334,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level7on") {
     level7on(0, 0);
@@ -1325,6 +1349,7 @@ function draw() {
       player.x = 180;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level7off") {
     level7off(0, 0);
@@ -1339,6 +1364,7 @@ function draw() {
       player.x = 180;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level8on") {
     level8on(0, 0);
@@ -1353,6 +1379,7 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "level8off") {
     level8off(0, 0);
@@ -1367,9 +1394,11 @@ function draw() {
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "end") {
     end(150, 250, 200, 100);
+    audioWin.play();
   }
 
   fill(255, 255, 255);
@@ -1381,8 +1410,8 @@ function mouseClicked() {
     state === "start" &&
     mouseX >= 350 &&
     mouseX <= 550 &&
-    mouseY >= 250 &&
-    mouseY <= 335
+    mouseY >= 450 &&
+    mouseY <= 535
   ) {
     state = "level1on";
     x = 0;
