@@ -7,7 +7,8 @@ let characterY1 = 300;
 let deathCount = -1;
 let canJump = true;
 let r = 0.0; // rotation of the star
-
+let audio = new Audio("music.mp3");
+// audio.play();
 // source of the code:https://github.com/processing/p5.js/wiki/Positioning-your-canvas
 function setup() {
   frameRate(30);
@@ -1153,6 +1154,7 @@ function draw() {
   else if (state === "level1on") {
     level1on(0, 0);
     character(player.x, player.y);
+    audio.play();
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
       state = "level2on";
