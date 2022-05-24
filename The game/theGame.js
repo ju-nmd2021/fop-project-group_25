@@ -147,27 +147,27 @@ function newGame(x, y, w, h) {
   rect(0, 0, 900, 600);
 
   fill(232, 232, 232);
-  rect(x, y, w, h - 15);
+  rect(x, y + 200, w, h - 15);
 
   fill(0, 0, 0);
   textSize(40);
   textFont("Impact");
-  text("NEW GAME", x + w / 12, y + h / 1.7);
+  text("NEW GAME", x + w / 12, y + h + 270 / 1.7);
 
-  fill(255, 0, 0);
-  textSize(80);
-  textFont("Impact");
-  text("R", x, y - h / 1.7);
+  fill(234, 114, 95);
+  textSize(300);
+  textFont("Rubik Bubbles");
+  text("R", x - 250, y - h + 300 / 1.7);
 
-  fill(0, 255, 0);
-  textSize(80);
-  textFont("Impact");
-  text("G", x + 80, y - h / 1.7);
+  fill(95, 234, 134);
+  textSize(300);
+  textFont("Rubik Bubbles");
+  text("G", x + 80 - 100, y - h + 300 / 1.7);
 
-  fill(0, 0, 255);
-  textSize(80);
-  textFont("Impact");
-  text("B", x + 160, y - h / 1.7);
+  fill(95, 195, 234);
+  textSize(300);
+  textFont("Rubik Bubbles");
+  text("B", x + 160 + 50, y - h + 300 / 1.7);
 }
 
 //character
@@ -1410,8 +1410,8 @@ function mouseClicked() {
     state === "start" &&
     mouseX >= 350 &&
     mouseX <= 550 &&
-    mouseY >= 250 &&
-    mouseY <= 335
+    mouseY >= 450 &&
+    mouseY <= 535
   ) {
     state = "level1on";
     x = 0;
