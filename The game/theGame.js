@@ -147,12 +147,20 @@ function newGame(x, y, w, h) {
   rect(0, 0, 900, 600);
 
   fill(232, 232, 232);
-  rect(x, y + 200, w, h - 15);
+  rect(x - 50, y + 140, w + 100, h - 35);
 
   fill(0, 0, 0);
-  textSize(40);
+  textSize(30);
   textFont("Michroma");
-  text("NEW GAME", x + w / 12, y + h + 270 / 1.7);
+  text("NEW GAME", x + w / 12 - 40, y + h + 140 / 1.7);
+
+  fill(232, 232, 232);
+  rect(x - 50, y + 220, w + 100, h - 35);
+
+  fill(0, 0, 0);
+  textSize(30);
+  textFont("Michroma");
+  text("CONTROLS", x + w / 12 - 40, y + h + 280 / 1.7);
 
   fill(234, 114, 95);
   textSize(300);
@@ -1405,13 +1413,16 @@ function draw() {
   rect(0, 600, 900, 200);
 }
 
+// 300, 390, 300, 65
+// 300, 470, 300, 65
+
 function mouseClicked() {
   if (
     state === "start" &&
-    mouseX >= 350 &&
-    mouseX <= 550 &&
-    mouseY >= 450 &&
-    mouseY <= 535
+    mouseX >= 300 &&
+    mouseX <= 600 &&
+    mouseY >= 390 &&
+    mouseY <= 455
   ) {
     state = "level1on";
     x = 0;
@@ -1419,6 +1430,15 @@ function mouseClicked() {
     tempCharacterX1 = 100;
     tempCharacterY1 = 450;
   } else if (
+    state === "start" &&
+    mouseX >= 300 &&
+    mouseX <= 600 &&
+    mouseY >= 470 &&
+    mouseY <= 535
+  ) {
+    state === "controls";
+  }
+  if (
     state === "end" &&
     mouseX >= 350 &&
     mouseX <= 560 &&
@@ -1469,3 +1489,12 @@ function keyPressed() {
     state = "level8on";
   }
 }
+
+rect(x - 50, y + 140, w + 100, h - 35);
+
+rect(x - 50, y + 220, w + 100, h - 35);
+
+newGame(350, 250, 200, 100);
+
+// 300, 390, 300, 65
+// 300, 470, 300, 65
