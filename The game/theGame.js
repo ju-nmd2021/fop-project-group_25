@@ -8,6 +8,13 @@ let deathCount = -1;
 let canJump = true;
 let r = 0.0;
 
+function setup() {
+  frameRate(30);
+  var canvas = createCanvas(900, 600);
+  noStroke();
+  canvas.parent("sketch-holder");
+}
+
 //canvas
 let canvas = [
   { x: -10, y: -10, width: 30, height: 610 },
@@ -126,8 +133,6 @@ const player = {
   speedY: 0,
   canJump: true,
 };
-
-noStroke();
 
 //start screen
 function newGame(x, y, w, h) {
