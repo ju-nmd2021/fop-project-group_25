@@ -177,6 +177,22 @@ function newGame(x, y, w, h) {
   textFont("Rubik Bubbles");
   text("B", x + 160 + 50, y - h + 300 / 1.7);
 }
+// control screen starts here
+function controls() {
+  fill(0, 0, 0);
+  textSize(30);
+  textFont("Helvetica");
+  text("MOVEMENT", 360, 100, 300, 300);
+
+  textSize(20);
+  text(" < go left", 400, 150, 300, 300);
+
+  text(" > go right", 400, 180, 300, 300);
+
+  text(" ^ jump", 400, 210, 300, 300);
+
+  text(" SPACE change worlds", 340, 240, 300, 300);
+}
 
 //character
 function character(object) {
@@ -1168,6 +1184,8 @@ function draw() {
 
   if (state === "start") {
     newGame(350, 250, 200, 100);
+  } else if (state === "controls") {
+    controls();
   }
   //level 11111111111111111111
   else if (state === "level1on") {
