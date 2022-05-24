@@ -756,7 +756,7 @@ function end(x, y, w, h) {
 //death count
 function death() {
   fill(231, 231, 231);
-  rect(50, 50, 100, 50);
+  rect(50, 50, 110, 50);
   fill(0, 0, 0);
   textSize(20);
   textFont("Impact");
