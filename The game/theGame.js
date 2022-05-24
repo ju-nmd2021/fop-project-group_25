@@ -6,8 +6,9 @@ let characterX1 = 100;
 let characterY1 = 300;
 let deathCount = -1;
 let canJump = true;
-let r = 0.0;
+let r = 0.0; // rotation of the star
 
+// source of the code:https://github.com/processing/p5.js/wiki/Positioning-your-canvas
 function setup() {
   frameRate(30);
   var canvas = createCanvas(900, 600);

@@ -6,10 +6,7 @@ body {
 body {
   margin: 0;
   display: flex;
-
-  /* This centers our sketch horizontally. */
   justify-content: center;
-
-  /* This centers our sketch vertically. */
   align-items: center;
 }
+/* Source of the code:https://github.com/processing/p5.js/wiki/Positioning-your-canvas */
