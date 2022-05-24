@@ -237,18 +237,6 @@ function character(object) {
   pop();
 }
 
-function startText() {
-  // fill(0, 0, 0);
-  // textSize(30);
-  // textFont("Helvetica");
-  // text("MOVEMENT", 360, 100, 300, 300);
-  // textSize(20);
-  // text(" < go left", 400, 150, 300, 300);
-  // text(" > go right", 400, 180, 300, 300);
-  // text(" ^ jump", 400, 210, 300, 300);
-  // text(" SPACE change worlds", 340, 240, 300, 300);
-}
-
 function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
   push();
   translate(translateX, translateY);
@@ -278,7 +266,6 @@ function level1on() {
   rect(0, 0, 900, 600);
 
   death();
-  startText();
 
   fill(230, 230, 230);
   rect(600, 500, 300, 100);
@@ -313,7 +300,6 @@ function level1off() {
   rect(0, 0, 900, 600);
 
   death();
-  startText();
 
   fill(55, 55, 55);
   rect(0, 500, 400, 100);
@@ -807,8 +793,8 @@ function death() {
   // rect(50, 50, 110, 50);
   fill(0, 0, 0);
   textSize(20);
-  textFont("Impact");
-  text("Deaths: " + deathCount, 30, 65, 100, 50);
+  textFont("Michroma");
+  text("Deaths: " + deathCount, 30, 65);
 }
 
 //collision detection
@@ -1158,9 +1144,7 @@ function draw() {
       state === "level2on" ||
       state === "level2off" ||
       state === "level5on" ||
-      state === "level5off" ||
-      state === "level7on" ||
-      state === "level7off"
+      state === "level5off"
     ) {
       audioDeath.play();
       deathCount = deathCount + 1;
@@ -1190,6 +1174,12 @@ function draw() {
       deathCount = deathCount + 1;
       player.x = 180;
       player.y = 300;
+      player.speedY = 0;
+    } else if (state === "level7on" || state === "level7off") {
+      audioDeath.play();
+      deathCount = deathCount + 1;
+      player.x = 100;
+      player.y = 200;
       player.speedY = 0;
     }
   }
@@ -1356,7 +1346,7 @@ function draw() {
     ) {
       state = "level7on";
       player.x = 100;
-      player.y = 300;
+      player.y = 200;
       player.speedY = 0;
       audioStar.play();
     }
@@ -1371,7 +1361,7 @@ function draw() {
     ) {
       state = "level7on";
       player.x = 100;
-      player.y = 300;
+      player.y = 200;
       player.speedY = 0;
       audioStar.play();
     }
@@ -1386,7 +1376,7 @@ function draw() {
     ) {
       state = "level8on";
       player.x = 180;
-      player.y = 200;
+      player.y = 300;
       player.speedY = 0;
       audioStar.play();
     }
@@ -1401,7 +1391,7 @@ function draw() {
     ) {
       state = "level8on";
       player.x = 180;
-      player.y = 200;
+      player.y = 300;
       player.speedY = 0;
       audioStar.play();
     }
