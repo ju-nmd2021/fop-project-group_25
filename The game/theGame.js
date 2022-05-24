@@ -151,7 +151,7 @@ function newGame(x, y, w, h) {
 
   fill(0, 0, 0);
   textSize(40);
-  textFont("Impact");
+  textFont("Michroma");
   text("NEW GAME", x + w / 12, y + h + 270 / 1.7);
 
   fill(234, 114, 95);
