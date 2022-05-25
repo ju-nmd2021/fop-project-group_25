@@ -127,7 +127,11 @@ let platforms8on = [
 
 let platforms8off = [];
 
+<<<<<<< Updated upstream
 // platform 99999
+=======
+//platforms level 99999
+>>>>>>> Stashed changes
 let platforms9on = [
   { x: 0, y: 500, width: 900, height: 100, visible: false },
   { x: 200, y: 100, width: 500, height: 30, visible: false },
@@ -139,6 +143,27 @@ let platforms9on = [
 let platforms9off = [
   { x: 0, y: 230, width: 200, height: 30, visible: false },
   { x: 700, y: 500, width: 200, height: 30, visible: false },
+];
+
+//platforms level 101010
+let platforms10on = [
+  { x: 100, y: 500, width: 100, height: 30, visible: false },
+  { x: 500, y: 300, width: 100, height: 30, visible: false },
+];
+
+let platforms10off = [
+  { x: 300, y: 400, width: 100, height: 30, visible: false },
+  { x: 700, y: 200, width: 100, height: 30, visible: false },
+];
+
+let platforms10on2 = [
+  { x: 0, y: 500, width: 110, height: 30, visible: false },
+  { x: 400, y: 300, width: 110, height: 30, visible: false },
+];
+
+let platforms10off2 = [
+  { x: 200, y: 400, width: 110, height: 30, visible: false },
+  { x: 600, y: 200, width: 110, height: 30, visible: false },
 ];
 
 //character object
@@ -307,6 +332,15 @@ function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
   }
   endShape(CLOSE);
   pop();
+}
+
+function deadlyTriangles(x, y) {
+  fill(0, 0, 0);
+  triangle(x, y, x + 10, y - 20, x + 20, y);
+  triangle(x + 20, y, x + 30, y - 20, x + 40, y);
+  triangle(x + 40, y, x + 50, y - 20, x + 60, y);
+  triangle(x + 60, y, x + 70, y - 20, x + 80, y);
+  triangle(x + 80, y, x + 90, y - 20, x + 100, y);
 }
 
 //level1
@@ -899,6 +933,124 @@ function level9off() {
   pop();
 }
 
+//level 10
+function level10on() {
+  push();
+  fill(240, 180, 174);
+  rect(0, 0, 900, 600);
+
+  death();
+  deadlyTriangles(0, 500);
+  deadlyTriangles(400, 300);
+
+  let level10On = platforms10on;
+  for (let i = 0; i < level10On.length; i++) {
+    fill(229, 116, 105);
+    rect(
+      level10On[i].x,
+      level10On[i].y,
+      level10On[i].width,
+      level10On[i].height
+    );
+
+    let level10On2 = platforms10on2;
+    for (let i = 0; i < level10On2.length; i++) {
+      fill(229, 116, 105);
+      rect(
+        level10On2[i].x,
+        level10On2[i].y,
+        level10On2[i].width,
+        level10On2[i].height
+      );
+    }
+
+    platforms1on.visible = false;
+    platforms1off.visible = false;
+    platforms2on.visible = false;
+    platforms2off.visible = false;
+    platforms3on.visible = false;
+    platforms3off.visible = false;
+    platforms4on.visible = false;
+    platforms4off.visible = false;
+    platforms5on.visible = false;
+    platforms5off.visible = false;
+    platforms6on.visible = false;
+    platforms6off.visible = false;
+    platforms7on.visible = false;
+    platforms7off.visible = false;
+    platforms8on.visible = false;
+    platforms8off.visible = false;
+    platforms9on.visible = false;
+    platforms9off.visible = false;
+    platforms10on.visible = true;
+    platforms10on2.visible = true;
+    platforms10off.visible = false;
+    platforms10off2.visible = false;
+
+    theFinalStar(0, 0, 10, 20, 5, 830, 150);
+    pop();
+  }
+}
+
+function level10off() {
+  push();
+  fill(174, 240, 180);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  deadlyTriangles(200, 400);
+  deadlyTriangles(600, 200);
+
+  let level10Off = platforms10off;
+  for (let i = 0; i < level10Off.length; i++) {
+    fill(105, 229, 116);
+    rect(
+      level10Off[i].x,
+      level10Off[i].y,
+      level10Off[i].width,
+      level10Off[i].height
+    );
+  }
+
+  let level10Off2 = platforms10off2;
+  for (let i = 0; i < level10Off2.length; i++) {
+    fill(105, 229, 116);
+    rect(
+      level10Off2[i].x,
+      level10Off2[i].y,
+      level10Off2[i].width,
+      level10Off2[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = false;
+  platforms6off.visible = false;
+  platforms7on.visible = false;
+  platforms7off.visible = false;
+  platforms8on.visible = false;
+  platforms8off.visible = false;
+  platforms9on.visible = false;
+  platforms9off.visible = false;
+  platforms10on.visible = false;
+  platforms10on2.visible = false;
+  platforms10off.visible = true;
+  platforms10off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 830, 150);
+  pop();
+}
+
 //collision detection
 function detectCollision(x, y, object) {
   return (
@@ -969,6 +1121,11 @@ function draw() {
   verticalDetection(platforms8off);
   verticalDetection(platforms9on);
   verticalDetection(platforms9off);
+  verticalDetection(platforms10on);
+  verticalDetection(platforms10off);
+
+  verticalDetection(platforms10on2);
+  verticalDetection(platforms10off2);
 
   //solving collision
   if (verticalCollisionDetected) {
@@ -1008,6 +1165,11 @@ function draw() {
   horizontalDetection(platforms8off);
   horizontalDetection(platforms9on);
   horizontalDetection(platforms9off);
+  horizontalDetection(platforms10on);
+  horizontalDetection(platforms10off);
+
+  horizontalDetection(platforms10on2);
+  horizontalDetection(platforms10off2);
 
   //solving collision
   for (let platform of canvas) {
@@ -1043,10 +1205,15 @@ function draw() {
       player.x = 50;
       player.y = 0;
       player.speedY = 0;
-    } else if (state === "level3on" || state === "level3off") {
+    } else if (
+      state === "level3on" ||
+      state === "level3off" ||
+      state === "level10on" ||
+      state === "level10off"
+    ) {
       audioDeath.play();
       deathCount = deathCount + 1;
-      player.x = 130;
+      player.x = 140;
       player.y = 300;
       player.speedY = 0;
     } else if (state === "level6on" || state === "level6off") {
@@ -1084,7 +1251,7 @@ function draw() {
     audio.play();
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
-      state = "level9on";
+      state = "level2on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -1095,7 +1262,7 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (tempCharacterX1 + 50 > 860 && tempCharacterY1 > 430) {
-      state = "level9on";
+      state = "level2on";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
@@ -1320,8 +1487,8 @@ function draw() {
       tempCharacterY1 > 50 &&
       tempCharacterY1 < 320
     ) {
-      state = "end";
-      player.x = 100;
+      state = "level10on";
+      player.x = 140;
       player.y = 300;
       player.speedY = 0;
       audioStar.play();
@@ -1335,11 +1502,89 @@ function draw() {
       tempCharacterY1 > 50 &&
       tempCharacterY1 < 320
     ) {
+      state = "level10on";
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
+      audioStar.play();
+    }
+  } else if (state === "level10on") {
+    level10on(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 820 &&
+      tempCharacterY1 > 150 &&
+      tempCharacterY1 < 220
+    ) {
       state = "end";
       player.x = 100;
       player.y = 300;
       player.speedY = 0;
       audioStar.play();
+    }
+    //deadly triangles
+    if (
+      tempCharacterX1 > 0 &&
+      tempCharacterX1 < 120 &&
+      tempCharacterY1 >= 500
+    ) {
+      audioDeath.play();
+      deathCount = deathCount + 1;
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
+    }
+    //deadly triangles
+    if (
+      tempCharacterX1 > 400 &&
+      tempCharacterX1 < 520 &&
+      tempCharacterY1 >= 300
+    ) {
+      audioDeath.play();
+      deathCount = deathCount + 1;
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
+    }
+  } else if (state === "level10off") {
+    level10off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 820 &&
+      tempCharacterY1 > 150 &&
+      tempCharacterY1 < 220
+    ) {
+      state = "end";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+      audioStar.play();
+    }
+    //deadly triangles
+    if (
+      tempCharacterX1 > 200 &&
+      tempCharacterX1 < 320 &&
+      tempCharacterY1 >= 400
+    ) {
+      audioDeath.play();
+      deathCount = deathCount + 1;
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
+    }
+    //deadly triangles
+    if (
+      tempCharacterX1 > 600 &&
+      tempCharacterX1 < 720 &&
+      tempCharacterY1 >= 200
+    ) {
+      audioDeath.play();
+      deathCount = deathCount + 1;
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
     }
   } else if (state === "end") {
     end(150, 250, 200, 100);
@@ -1430,5 +1675,9 @@ function keyPressed() {
     state = "level9off";
   } else if (keyCode === 32 && state === "level9off") {
     state = "level9on";
+  } else if (keyCode === 32 && state === "level10on") {
+    state = "level10off";
+  } else if (keyCode === 32 && state === "level10off") {
+    state = "level10on";
   }
 }
