@@ -1063,8 +1063,6 @@ function level11on() {
     platforms9on.visible = false;
     platforms9off.visible = false;
     platforms10on.visible = false;
-    platforms10on2.visible = false;
-    platforms10off.visible = false;
     platforms10off.visible = false;
     platforms11on.visible = true;
     platforms11off.visible = false;
@@ -1111,8 +1109,6 @@ function level11off() {
   platforms9on.visible = false;
   platforms9off.visible = false;
   platforms10on.visible = false;
-  platforms10on2.visible = false;
-  platforms10off.visible = false;
   platforms10off.visible = false;
   platforms11on.visible = false;
   platforms11off.visible = true;
@@ -1193,6 +1189,8 @@ function draw() {
   verticalDetection(platforms9off);
   verticalDetection(platforms10on);
   verticalDetection(platforms10off);
+  verticalDetection(platforms11on);
+  verticalDetection(platforms11off);
 
   //solving collision
   if (verticalCollisionDetected) {
@@ -1234,6 +1232,8 @@ function draw() {
   horizontalDetection(platforms9off);
   horizontalDetection(platforms10on);
   horizontalDetection(platforms10off);
+  horizontalDetection(platforms11on);
+  horizontalDetection(platforms11off);
 
   //solving collision
   for (let platform of canvas) {
