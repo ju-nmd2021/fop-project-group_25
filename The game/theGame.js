@@ -1785,3 +1785,8 @@ function keyPressed() {
     state = "level11on";
   }
 }
+
+//game reference: https://js13kgames.com/games/onoff/index.html
+//other sources that we used:
+//https://www.w3schools.com/ (general)
+//https://www.youtube.com/watch?v=APivt7U4WP0&ab_channel=MichaelHulbert (jumping)
