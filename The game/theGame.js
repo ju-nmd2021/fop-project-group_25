@@ -127,11 +127,7 @@ let platforms8on = [
 
 let platforms8off = [];
 
-<<<<<<< Updated upstream
 //level 99999
-=======
-// platform 99999
->>>>>>> Stashed changes
 let platforms9on = [
   { x: 0, y: 500, width: 900, height: 100, visible: false },
   { x: 200, y: 100, width: 500, height: 30, visible: false },
@@ -1197,13 +1193,6 @@ function draw() {
   verticalDetection(platforms9off);
   verticalDetection(platforms10on);
   verticalDetection(platforms10off);
-<<<<<<< Updated upstream
-=======
-  verticalDetection(platforms10on2);
-  verticalDetection(platforms10off2);
-  verticalDetection(platforms11on);
-  verticalDetection(platforms11off);
->>>>>>> Stashed changes
 
   //solving collision
   if (verticalCollisionDetected) {
@@ -1245,13 +1234,6 @@ function draw() {
   horizontalDetection(platforms9off);
   horizontalDetection(platforms10on);
   horizontalDetection(platforms10off);
-<<<<<<< Updated upstream
-=======
-  horizontalDetection(platforms10on2);
-  horizontalDetection(platforms10off2);
-  horizontalDetection(platforms11on);
-  horizontalDetection(platforms11off);
->>>>>>> Stashed changes
 
   //solving collision
   for (let platform of canvas) {
