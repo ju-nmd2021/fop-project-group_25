@@ -127,7 +127,11 @@ let platforms8on = [
 
 let platforms8off = [];
 
+<<<<<<< Updated upstream
 //level 99999
+=======
+// platform 99999
+>>>>>>> Stashed changes
 let platforms9on = [
   { x: 0, y: 500, width: 900, height: 100, visible: false },
   { x: 200, y: 100, width: 500, height: 30, visible: false },
@@ -150,6 +154,21 @@ let platforms10on = [
 let platforms10off = [
   { x: 200, y: 400, width: 200, height: 30, visible: false },
   { x: 600, y: 200, width: 200, height: 30, visible: false },
+];
+
+// platform 11
+let platforms11on = [
+  { x: 0, y: 500, width: 50, height: 50, visible: false },
+  { x: 200, y: 100, width: 50, height: 50, visible: false },
+  { x: 200, y: 400, width: 50, height: 50, visible: false },
+  { x: 200, y: 100, width: 50, height: 50, visible: false },
+  { x: 700, y: 400, width: 50, height: 50, visible: false },
+];
+
+let platforms11off = [
+  { x: 0, y: 250, width: 50, height: 50, visible: false },
+  { x: 700, y: 500, width: 50, height: 50, visible: false },
+  { x: 450, y: 150, width: 50, height: 50, visible: false },
 ];
 
 //character object
@@ -1011,6 +1030,101 @@ function level10off() {
   pop();
 }
 
+//level 11
+function level11on() {
+  push();
+  fill(240, 180, 174);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level11On = platforms11on;
+  for (let i = 0; i < level11On.length; i++) {
+    fill(229, 116, 105);
+    rect(
+      level11On[i].x,
+      level11On[i].y,
+      level11On[i].width,
+      level11On[i].height
+    );
+
+    platforms1on.visible = false;
+    platforms1off.visible = false;
+    platforms2on.visible = false;
+    platforms2off.visible = false;
+    platforms3on.visible = false;
+    platforms3off.visible = false;
+    platforms4on.visible = false;
+    platforms4off.visible = false;
+    platforms5on.visible = false;
+    platforms5off.visible = false;
+    platforms6on.visible = false;
+    platforms6off.visible = false;
+    platforms7on.visible = false;
+    platforms7off.visible = false;
+    platforms8on.visible = false;
+    platforms8off.visible = false;
+    platforms9on.visible = false;
+    platforms9off.visible = false;
+    platforms10on.visible = false;
+    platforms10on2.visible = false;
+    platforms10off.visible = false;
+    platforms10off.visible = false;
+    platforms11on.visible = true;
+    platforms11off.visible = false;
+
+    theFinalStar(0, 0, 10, 20, 5, 690, 50);
+    pop();
+  }
+}
+
+function level11off() {
+  push();
+  fill(174, 240, 180);
+  rect(0, 0, 900, 600);
+
+  death();
+
+  let level11Off = platforms11off;
+  for (let i = 0; i < level11Off.length; i++) {
+    fill(105, 229, 116);
+    rect(
+      level11Off[i].x,
+      level11Off[i].y,
+      level11Off[i].width,
+      level11Off[i].height
+    );
+  }
+
+  platforms1on.visible = false;
+  platforms1off.visible = false;
+  platforms2on.visible = false;
+  platforms2off.visible = false;
+  platforms3on.visible = false;
+  platforms3off.visible = false;
+  platforms4on.visible = false;
+  platforms4off.visible = false;
+  platforms5on.visible = false;
+  platforms5off.visible = false;
+  platforms6on.visible = false;
+  platforms6off.visible = false;
+  platforms7on.visible = false;
+  platforms7off.visible = false;
+  platforms8on.visible = false;
+  platforms8off.visible = false;
+  platforms9on.visible = false;
+  platforms9off.visible = false;
+  platforms10on.visible = false;
+  platforms10on2.visible = false;
+  platforms10off.visible = false;
+  platforms10off.visible = false;
+  platforms11on.visible = false;
+  platforms11off.visible = true;
+
+  theFinalStar(0, 0, 10, 20, 5, 690, 50);
+  pop();
+}
+
 //collision detection
 function detectCollision(x, y, object) {
   return (
@@ -1083,6 +1197,13 @@ function draw() {
   verticalDetection(platforms9off);
   verticalDetection(platforms10on);
   verticalDetection(platforms10off);
+<<<<<<< Updated upstream
+=======
+  verticalDetection(platforms10on2);
+  verticalDetection(platforms10off2);
+  verticalDetection(platforms11on);
+  verticalDetection(platforms11off);
+>>>>>>> Stashed changes
 
   //solving collision
   if (verticalCollisionDetected) {
@@ -1124,6 +1245,13 @@ function draw() {
   horizontalDetection(platforms9off);
   horizontalDetection(platforms10on);
   horizontalDetection(platforms10off);
+<<<<<<< Updated upstream
+=======
+  horizontalDetection(platforms10on2);
+  horizontalDetection(platforms10off2);
+  horizontalDetection(platforms11on);
+  horizontalDetection(platforms11off);
+>>>>>>> Stashed changes
 
   //solving collision
   for (let platform of canvas) {
@@ -1187,6 +1315,12 @@ function draw() {
       deathCount = deathCount + 1;
       player.x = 100;
       player.y = 200;
+      player.speedY = 0;
+    } else if (state === "level11on" || state === "level11off") {
+      audioDeath.play();
+      deathCount = deathCount + 1;
+      player.x = 25;
+      player.y = 300;
       player.speedY = 0;
     }
   }
@@ -1471,8 +1605,8 @@ function draw() {
       tempCharacterY1 > 150 &&
       tempCharacterY1 < 220
     ) {
-      state = "end";
-      player.x = 100;
+      state = "level11on";
+      player.x = 25;
       player.y = 300;
       player.speedY = 0;
       audioStar.play();
@@ -1510,8 +1644,8 @@ function draw() {
       tempCharacterY1 > 150 &&
       tempCharacterY1 < 220
     ) {
-      state = "end";
-      player.x = 100;
+      state = "level11on";
+      player.x = 25;
       player.y = 300;
       player.speedY = 0;
       audioStar.play();
@@ -1539,6 +1673,36 @@ function draw() {
       player.x = 140;
       player.y = 300;
       player.speedY = 0;
+    }
+  } else if (state === "level11on") {
+    level11on(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 690 &&
+      tempCharacterY1 > 50 &&
+      tempCharacterY1 < 320
+    ) {
+      state = "end";
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
+      audioStar.play();
+    }
+  } else if (state === "level11off") {
+    level11off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 690 &&
+      tempCharacterY1 > 50 &&
+      tempCharacterY1 < 320
+    ) {
+      state = "end";
+      player.x = 140;
+      player.y = 300;
+      player.speedY = 0;
+      audioStar.play();
     }
   } else if (state === "end") {
     end(150, 250, 200, 100);
@@ -1633,5 +1797,9 @@ function keyPressed() {
     state = "level10off";
   } else if (keyCode === 32 && state === "level10off") {
     state = "level10on";
+  } else if (keyCode === 32 && state === "level11on") {
+    state = "level11off";
+  } else if (keyCode === 32 && state === "level11off") {
+    state = "level11on";
   }
 }
