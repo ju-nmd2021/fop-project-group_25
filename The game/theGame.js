@@ -1,6 +1,4 @@
-let ground = 500;
 let state = "start";
-let speed = 0;
 const gravity = 1;
 let characterX1 = 100;
 let characterY1 = 300;
@@ -13,7 +11,7 @@ let audioStar = new Audio("star.mp3");
 let audioDeath = new Audio("death.mp3");
 let audioWin = new Audio("win.mp3");
 
-// source of the code:https://github.com/processing/p5.js/wiki/Positioning-your-canvas
+// source of the code: https://github.com/processing/p5.js/wiki/Positioning-your-canvas
 function setup() {
   frameRate(30);
   var canvas = createCanvas(900, 600);
@@ -107,9 +105,8 @@ let platforms7on = [
 let platforms7off = [];
 
 //platforms level 88888
-
 let platforms8on = [
-  //vertial
+  //vertical
   { x: 100, y: 200, width: 30, height: 300, visible: false },
   { x: 380, y: 200, width: 30, height: 300, visible: false },
   { x: 650, y: 200, width: 30, height: 300, visible: false },
@@ -118,7 +115,7 @@ let platforms8on = [
   { x: 530, y: 200, width: 30, height: 300, visible: false },
   { x: 800, y: 200, width: 30, height: 300, visible: false },
 
-  //horizotal
+  //horizontal
   { x: 100, y: 200, width: 180, height: 30, visible: false },
   { x: 380, y: 200, width: 180, height: 30, visible: false },
   { x: 650, y: 200, width: 180, height: 30, visible: false },
@@ -176,7 +173,8 @@ function newGame(x, y, w, h) {
   textFont("Rubik Bubbles");
   text("B", x + 160 + 50, y - h + 300 / 1.7);
 }
-// control screen starts here
+
+// control screen
 function controls() {
   fill(31, 31, 31);
   rect(0, 0, 900, 600);
@@ -195,6 +193,7 @@ function controls() {
   text(" PRESS  SPACE  BAR  TO  CHANGE  THE  WORLDS", 140, 350, 900, 300);
 }
 
+//button to go back
 function goBack() {
   fill(234, 114, 95);
   rect(30, 30, 30, 30);
@@ -202,6 +201,35 @@ function goBack() {
   textFont("Helvetica");
   textSize(20);
   text("X", 38, 53);
+}
+
+//end screen
+function end(x, y, w, h) {
+  fill(31, 31, 31);
+  rect(0, 0, 900, 600);
+
+  fill(232, 232, 232);
+  rect(x + 100, y, w + 200, h - 30);
+
+  fill(0, 0, 0);
+  textSize(40);
+  textFont("Michroma");
+  text("PLAY AGAIN", x + 125, y + h - 50);
+
+  fill(255, 0, 0);
+  textSize(50);
+  textFont("Michroma");
+  text("CONGRATULATIONS", x - 70, y - h / 1.7);
+}
+
+//death count
+function death() {
+  fill(255, 255, 255);
+  // rect(50, 50, 110, 50);
+  fill(0, 0, 0);
+  textSize(20);
+  textFont("Michroma");
+  text("Deaths: " + deathCount, 30, 65);
 }
 
 //character
@@ -237,6 +265,7 @@ function character(object) {
   pop();
 }
 
+//source of the code: https://p5js.org/examples/form-star.html
 function theFinalStar(x, y, radius1, radius2, npoints, translateX, translateY) {
   push();
   translate(translateX, translateY);
@@ -767,36 +796,6 @@ function level8off() {
   pop();
 }
 
-//end screen
-
-function end(x, y, w, h) {
-  fill(31, 31, 31);
-  rect(0, 0, 900, 600);
-
-  fill(232, 232, 232);
-  rect(x + 100, y, w + 200, h - 30);
-
-  fill(0, 0, 0);
-  textSize(40);
-  textFont("Michroma");
-  text("PLAY AGAIN", x + 125, y + h - 50);
-
-  fill(255, 0, 0);
-  textSize(50);
-  textFont("Michroma");
-  text("CONGRATULATIONS", x - 70, y - h / 1.7);
-}
-
-//death count
-function death() {
-  fill(255, 255, 255);
-  // rect(50, 50, 110, 50);
-  fill(0, 0, 0);
-  textSize(20);
-  textFont("Michroma");
-  text("Deaths: " + deathCount, 30, 65);
-}
-
 //collision detection
 function detectCollision(x, y, object) {
   return (
@@ -838,150 +837,35 @@ function draw() {
   // detect vertical collision
   let verticalCollisionDetected = false;
 
-  for (let platform of platforms1on) {
-    if (
-      platforms1on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
+  function verticalDetection(level) {
+    for (let platform of level) {
+      if (
+        level.visible === true &&
+        detectCollision(player.x, tempCharacterY1, platform)
+      ) {
+        verticalCollisionDetected = true;
+        player.y = platform.y;
+      }
     }
   }
-  for (let platform of platforms1off) {
-    if (
-      platforms1off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms2on) {
-    if (
-      platforms2on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms2off) {
-    if (
-      platforms2off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms3on) {
-    if (
-      platforms3on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms3off) {
-    if (
-      platforms3off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms4on) {
-    if (
-      platforms4on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms4off) {
-    if (
-      platforms4off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms5on) {
-    if (
-      platforms5on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms5off) {
-    if (
-      platforms5off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms6on) {
-    if (
-      platforms6on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms6off) {
-    if (
-      platforms6off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms7on) {
-    if (
-      platforms7on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms7off) {
-    if (
-      platforms7off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms8on) {
-    if (
-      platforms8on.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
-  for (let platform of platforms8off) {
-    if (
-      platforms8off.visible === true &&
-      detectCollision(player.x, tempCharacterY1, platform)
-    ) {
-      verticalCollisionDetected = true;
-      player.y = platform.y;
-    }
-  }
+  verticalDetection(platforms1on);
+  verticalDetection(platforms1off);
+  verticalDetection(platforms2on);
+  verticalDetection(platforms2off);
+  verticalDetection(platforms3on);
+  verticalDetection(platforms3off);
+  verticalDetection(platforms4on);
+  verticalDetection(platforms4off);
+  verticalDetection(platforms5on);
+  verticalDetection(platforms5off);
+  verticalDetection(platforms6on);
+  verticalDetection(platforms6off);
+  verticalDetection(platforms7on);
+  verticalDetection(platforms7off);
+  verticalDetection(platforms8on);
+  verticalDetection(platforms8off);
+
+  //solving collision
   if (verticalCollisionDetected) {
     player.speedY = 0;
     player.canJump = true;
@@ -990,136 +874,35 @@ function draw() {
   }
   // detect horizontal collision
   let horizontalCollisionDetected = false;
-  for (let platform of platforms1on) {
-    if (
-      platforms1on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms1off) {
-    if (
-      platforms1off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms2on) {
-    if (
-      platforms2on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms2off) {
-    if (
-      platforms2off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
 
-  for (let platform of platforms3on) {
-    if (
-      platforms3on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
+  function horizontalDetection(level) {
+    for (let platform of level) {
+      if (
+        level.visible === true &&
+        detectCollision(tempCharacterX1, player.y, platform)
+      ) {
+        horizontalCollisionDetected = true;
+      }
     }
   }
-  for (let platform of platforms3off) {
-    if (
-      platforms3off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms4on) {
-    if (
-      platforms4on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms4off) {
-    if (
-      platforms4off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms5on) {
-    if (
-      platforms5on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms5off) {
-    if (
-      platforms5off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms6on) {
-    if (
-      platforms6on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms6off) {
-    if (
-      platforms6off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms7on) {
-    if (
-      platforms7on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms7off) {
-    if (
-      platforms7off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms8on) {
-    if (
-      platforms8on.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
-  for (let platform of platforms8off) {
-    if (
-      platforms8off.visible === true &&
-      detectCollision(tempCharacterX1, player.y, platform)
-    ) {
-      horizontalCollisionDetected = true;
-    }
-  }
+  horizontalDetection(platforms1on);
+  horizontalDetection(platforms1off);
+  horizontalDetection(platforms2on);
+  horizontalDetection(platforms2off);
+  horizontalDetection(platforms3on);
+  horizontalDetection(platforms3off);
+  horizontalDetection(platforms4on);
+  horizontalDetection(platforms4off);
+  horizontalDetection(platforms5on);
+  horizontalDetection(platforms5off);
+  horizontalDetection(platforms6on);
+  horizontalDetection(platforms6off);
+  horizontalDetection(platforms7on);
+  horizontalDetection(platforms7off);
+  horizontalDetection(platforms8on);
+  horizontalDetection(platforms8off);
 
+  //solving collision
   for (let platform of canvas) {
     if (detectCollision(tempCharacterX1, player.y, platform)) {
       horizontalCollisionDetected = true;
@@ -1130,12 +913,6 @@ function draw() {
   }
   ///////////////the end of collisions
 
-  if (tempCharacterX1 < 0) {
-    tempCharacterX1 = 0;
-  }
-  if (tempCharacterX1 + 50 > 900) {
-    tempCharacterX1 = 900 - 50;
-  }
   //death count
   if (player.y > 650) {
     if (
@@ -1190,7 +967,7 @@ function draw() {
     controls();
     goBack();
   }
-  //level 11111111111111111111
+  //game mode
   else if (state === "level1on") {
     level1on(0, 0);
     character(player.x, player.y);
@@ -1429,9 +1206,6 @@ function draw() {
     end(150, 250, 200, 100);
     audioWin.play();
   }
-
-  fill(255, 255, 255);
-  rect(0, 600, 900, 200);
 }
 
 function mouseClicked() {
@@ -1464,7 +1238,6 @@ function mouseClicked() {
   ) {
     state = "start";
   }
-
   if (
     state === "end" &&
     mouseX >= 250 &&
