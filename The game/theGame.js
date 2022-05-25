@@ -143,23 +143,13 @@ let platforms9off = [
 
 //platforms level 101010
 let platforms10on = [
-  { x: 100, y: 500, width: 100, height: 30, visible: false },
-  { x: 500, y: 300, width: 100, height: 30, visible: false },
+  { x: 0, y: 500, width: 200, height: 30, visible: false },
+  { x: 400, y: 300, width: 200, height: 30, visible: false },
 ];
 
 let platforms10off = [
-  { x: 300, y: 400, width: 100, height: 30, visible: false },
-  { x: 700, y: 200, width: 100, height: 30, visible: false },
-];
-
-let platforms10on2 = [
-  { x: 0, y: 500, width: 110, height: 30, visible: false },
-  { x: 400, y: 300, width: 110, height: 30, visible: false },
-];
-
-let platforms10off2 = [
-  { x: 200, y: 400, width: 110, height: 30, visible: false },
-  { x: 600, y: 200, width: 110, height: 30, visible: false },
+  { x: 200, y: 400, width: 200, height: 30, visible: false },
+  { x: 600, y: 200, width: 200, height: 30, visible: false },
 ];
 
 //character object
@@ -949,17 +939,6 @@ function level10on() {
       level10On[i].height
     );
 
-    let level10On2 = platforms10on2;
-    for (let i = 0; i < level10On2.length; i++) {
-      fill(234, 228, 95);
-      rect(
-        level10On2[i].x,
-        level10On2[i].y,
-        level10On2[i].width,
-        level10On2[i].height
-      );
-    }
-
     platforms1on.visible = false;
     platforms1off.visible = false;
     platforms2on.visible = false;
@@ -979,9 +958,7 @@ function level10on() {
     platforms9on.visible = false;
     platforms9off.visible = false;
     platforms10on.visible = true;
-    platforms10on2.visible = true;
     platforms10off.visible = false;
-    platforms10off2.visible = false;
 
     theFinalStar(0, 0, 10, 20, 5, 830, 150);
     pop();
@@ -1009,17 +986,6 @@ function level10off() {
     );
   }
 
-  let level10Off2 = platforms10off2;
-  for (let i = 0; i < level10Off2.length; i++) {
-    fill(97, 219, 239);
-    rect(
-      level10Off2[i].x,
-      level10Off2[i].y,
-      level10Off2[i].width,
-      level10Off2[i].height
-    );
-  }
-
   platforms1on.visible = false;
   platforms1off.visible = false;
   platforms2on.visible = false;
@@ -1039,8 +1005,6 @@ function level10off() {
   platforms9on.visible = false;
   platforms9off.visible = false;
   platforms10on.visible = false;
-  platforms10on2.visible = false;
-  platforms10off.visible = true;
   platforms10off.visible = true;
 
   theFinalStar(0, 0, 10, 20, 5, 830, 150);
@@ -1120,9 +1084,6 @@ function draw() {
   verticalDetection(platforms10on);
   verticalDetection(platforms10off);
 
-  verticalDetection(platforms10on2);
-  verticalDetection(platforms10off2);
-
   //solving collision
   if (verticalCollisionDetected) {
     player.speedY = 0;
@@ -1163,9 +1124,6 @@ function draw() {
   horizontalDetection(platforms9off);
   horizontalDetection(platforms10on);
   horizontalDetection(platforms10off);
-
-  horizontalDetection(platforms10on2);
-  horizontalDetection(platforms10off2);
 
   //solving collision
   for (let platform of canvas) {
