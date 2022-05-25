@@ -1300,42 +1300,43 @@ function draw() {
       player.y = 300;
       player.speedY = 0;
       audioStar.play();
-    } else if (state === "level9on") {
-      level9on(0, 0);
-      character(player.x, player.y);
-      //level complete
-      if (
-        tempCharacterX1 + 50 > 720 &&
-        tempCharacterY1 > 250 &&
-        tempCharacterY1 < 320
-      ) {
-        state = "end";
-        player.x = 100;
-        player.y = 300;
-        player.speedY = 0;
-        audioStar.play();
-      }
-    } else if (state === "level9off") {
-      level9off(0, 0);
-      character(player.x, player.y);
-      //level complete
-      if (
-        tempCharacterX1 + 50 > 720 &&
-        tempCharacterY1 > 250 &&
-        tempCharacterY1 < 320
-      ) {
-        state = "end";
-        player.x = 100;
-        player.y = 300;
-        player.speedY = 0;
-        audioStar.play();
-      }
-    } else if (state === "end") {
-      end(150, 250, 200, 100);
-      audioWin.play();
     }
+  } else if (state === "level9on") {
+    level9on(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 720 &&
+      tempCharacterY1 > 250 &&
+      tempCharacterY1 < 320
+    ) {
+      state = "end";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+      audioStar.play();
+    }
+  } else if (state === "level9off") {
+    level9off(0, 0);
+    character(player.x, player.y);
+    //level complete
+    if (
+      tempCharacterX1 + 50 > 720 &&
+      tempCharacterY1 > 250 &&
+      tempCharacterY1 < 320
+    ) {
+      state = "end";
+      player.x = 100;
+      player.y = 300;
+      player.speedY = 0;
+      audioStar.play();
+    }
+  } else if (state === "end") {
+    end(150, 250, 200, 100);
+    audioWin.play();
   }
 }
+
 function mouseClicked() {
   if (
     state === "start" &&
