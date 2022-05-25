@@ -131,14 +131,14 @@ let platforms8off = [];
 // platform 99999
 let platforms9on = [
   { x: 0, y: 500, width: 900, height: 100, visible: false },
-  { x: 200, y: 200, width: 500, height: 30, visible: false },
+  { x: 200, y: 100, width: 500, height: 30, visible: false },
   { x: 200, y: 400, width: 500, height: 30, visible: false },
-  { x: 200, y: 300, width: 200, height: 30, visible: false },
-  { x: 700, y: 500, width: 100, height: 30, visible: false },
+  { x: 200, y: 100, width: 30, height: 300, visible: false },
+  { x: 700, y: 400, width: 30, height: 130, visible: false },
 ];
 
 let platforms9off = [
-  { x: 0, y: 300, width: 200, height: 30, visible: false },
+  { x: 0, y: 230, width: 200, height: 30, visible: false },
   { x: 700, y: 500, width: 200, height: 30, visible: false },
 ];
 
@@ -369,6 +369,8 @@ function level1off() {
   platforms7off.visible = false;
   platforms8on.visible = false;
   platforms8off.visible = false;
+  platforms9on.visible = false;
+  platforms9off.visible = false;
 
   theFinalStar(0, 0, 10, 20, 5, 850, 470);
 }
@@ -843,7 +845,7 @@ function level9on() {
     platforms9on.visible = true;
     platforms9off.visible = false;
 
-    theFinalStar(0, 0, 10, 20, 5, 720, 200);
+    theFinalStar(0, 0, 10, 20, 5, 690, 50);
     pop();
   }
 }
@@ -885,7 +887,7 @@ function level9off() {
   platforms9on.visible = false;
   platforms9off.visible = true;
 
-  theFinalStar(0, 0, 10, 20, 5, 720, 200);
+  theFinalStar(0, 0, 10, 20, 5, 690, 50);
   pop();
 }
 
@@ -1306,8 +1308,8 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (
-      tempCharacterX1 + 50 > 720 &&
-      tempCharacterY1 > 250 &&
+      tempCharacterX1 + 50 > 690 &&
+      tempCharacterY1 > 50 &&
       tempCharacterY1 < 320
     ) {
       state = "end";
@@ -1321,8 +1323,8 @@ function draw() {
     character(player.x, player.y);
     //level complete
     if (
-      tempCharacterX1 + 50 > 720 &&
-      tempCharacterY1 > 250 &&
+      tempCharacterX1 + 50 > 690 &&
+      tempCharacterY1 > 50 &&
       tempCharacterY1 < 320
     ) {
       state = "end";
