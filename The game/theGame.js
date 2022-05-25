@@ -1737,52 +1737,53 @@ function mouseClicked() {
     deathCount = -1;
   }
 }
-
 function keyPressed() {
-  if (keyCode === 32 && state === "level1on") {
-    state = "level1off";
-  } else if (keyCode === 32 && state === "level1off") {
-    state = "level1on";
-  } else if (keyCode === 32 && state === "level2on") {
-    state = "level2off";
-  } else if (keyCode === 32 && state === "level2off") {
-    state = "level2on";
-  } else if (keyCode === 32 && state === "level3on") {
-    state = "level3off";
-  } else if (keyCode === 32 && state === "level3off") {
-    state = "level3on";
-  } else if (keyCode === 32 && state === "level4on") {
-    state = "level4off";
-  } else if (keyCode === 32 && state === "level4off") {
-    state = "level4on";
-  } else if (keyCode === 32 && state === "level5on") {
-    state = "level5off";
-  } else if (keyCode === 32 && state === "level5off") {
-    state = "level5on";
-  } else if (keyCode === 32 && state === "level6on") {
-    state = "level6off";
-  } else if (keyCode === 32 && state === "level6off") {
-    state = "level6on";
-  } else if (keyCode === 32 && state === "level7on") {
-    state = "level7off";
-  } else if (keyCode === 32 && state === "level7off") {
-    state = "level7on";
-  } else if (keyCode === 32 && state === "level8on") {
-    state = "level8off";
-  } else if (keyCode === 32 && state === "level8off") {
-    state = "level8on";
-  } else if (keyCode === 32 && state === "level9on") {
-    state = "level9off";
-  } else if (keyCode === 32 && state === "level9off") {
-    state = "level9on";
-  } else if (keyCode === 32 && state === "level10on") {
-    state = "level10off";
-  } else if (keyCode === 32 && state === "level10off") {
-    state = "level10on";
-  } else if (keyCode === 32 && state === "level11on") {
-    state = "level11off";
-  } else if (keyCode === 32 && state === "level11off") {
-    state = "level11on";
+  if (keyCode === 32) {
+    if (state === "level1on") {
+      state = "level1off";
+    } else if (state === "level1off") {
+      state = "level1on";
+    } else if (state === "level2on") {
+      state = "level2off";
+    } else if (state === "level2off") {
+      state = "level2on";
+    } else if (state === "level3on") {
+      state = "level3off";
+    } else if (state === "level3off") {
+      state = "level3on";
+    } else if (state === "level4on") {
+      state = "level4off";
+    } else if (state === "level4off") {
+      state = "level4on";
+    } else if (state === "level5on") {
+      state = "level5off";
+    } else if (state === "level5off") {
+      state = "level5on";
+    } else if (state === "level6on") {
+      state = "level6off";
+    } else if (state === "level6off") {
+      state = "level6on";
+    } else if (state === "level7on") {
+      state = "level7off";
+    } else if (state === "level7off") {
+      state = "level7on";
+    } else if (state === "level8on") {
+      state = "level8off";
+    } else if (state === "level8off") {
+      state = "level8on";
+    } else if (state === "level9on") {
+      state = "level9off";
+    } else if (state === "level9off") {
+      state = "level9on";
+    } else if (state === "level10on") {
+      state = "level10off";
+    } else if (state === "level10off") {
+      state = "level10on";
+    } else if (state === "level11on") {
+      state = "level11off";
+    } else if (state === "level11off") {
+      state = "level11on";
+    }
   }
 }
 
