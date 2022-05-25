@@ -127,7 +127,6 @@ let platforms8on = [
 
 let platforms8off = [];
 
-// level 9
 // platform 99999
 let platforms9on = [
   { x: 0, y: 500, width: 900, height: 100, visible: false },
@@ -244,7 +243,16 @@ function death() {
   fill(0, 0, 0);
   textSize(20);
   textFont("Michroma");
-  text("Deaths: " + deathCount, 30, 65);
+  rect(50, 50, 30, 15);
+  rect(55, 60, 20, 15);
+  push();
+  fill(255);
+  rect(55, 55, 5, 5);
+  rect(70, 55, 5, 5);
+  rect(60, 72, 3, 3);
+  rect(67, 72, 3, 3);
+  pop();
+  text(" " + deathCount, 80, 70);
 }
 
 //character
