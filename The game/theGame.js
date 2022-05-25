@@ -127,11 +127,7 @@ let platforms8on = [
 
 let platforms8off = [];
 
-<<<<<<< Updated upstream
-// platform 99999
-=======
-//platforms level 99999
->>>>>>> Stashed changes
+//level 99999
 let platforms9on = [
   { x: 0, y: 500, width: 900, height: 100, visible: false },
   { x: 200, y: 100, width: 500, height: 30, visible: false },
@@ -858,14 +854,14 @@ function level8off() {
 //level 9
 function level9on() {
   push();
-  fill(240, 180, 174);
+  fill(237, 203, 240);
   rect(0, 0, 900, 600);
 
   death();
 
   let level9On = platforms9on;
   for (let i = 0; i < level9On.length; i++) {
-    fill(229, 116, 105);
+    fill(227, 97, 239);
     rect(level9On[i].x, level9On[i].y, level9On[i].width, level9On[i].height);
 
     platforms1on.visible = false;
@@ -894,14 +890,14 @@ function level9on() {
 
 function level9off() {
   push();
-  fill(174, 240, 180);
+  fill(240, 219, 203);
   rect(0, 0, 900, 600);
 
   death();
 
   let level9Off = platforms9off;
   for (let i = 0; i < level9Off.length; i++) {
-    fill(105, 229, 116);
+    fill(239, 156, 97);
     rect(
       level9Off[i].x,
       level9Off[i].y,
@@ -936,7 +932,7 @@ function level9off() {
 //level 10
 function level10on() {
   push();
-  fill(240, 180, 174);
+  fill(238, 235, 176);
   rect(0, 0, 900, 600);
 
   death();
@@ -945,7 +941,7 @@ function level10on() {
 
   let level10On = platforms10on;
   for (let i = 0; i < level10On.length; i++) {
-    fill(229, 116, 105);
+    fill(234, 228, 95);
     rect(
       level10On[i].x,
       level10On[i].y,
@@ -955,7 +951,7 @@ function level10on() {
 
     let level10On2 = platforms10on2;
     for (let i = 0; i < level10On2.length; i++) {
-      fill(229, 116, 105);
+      fill(234, 228, 95);
       rect(
         level10On2[i].x,
         level10On2[i].y,
@@ -994,7 +990,7 @@ function level10on() {
 
 function level10off() {
   push();
-  fill(174, 240, 180);
+  fill(176, 238, 235);
   rect(0, 0, 900, 600);
 
   death();
@@ -1004,7 +1000,7 @@ function level10off() {
 
   let level10Off = platforms10off;
   for (let i = 0; i < level10Off.length; i++) {
-    fill(105, 229, 116);
+    fill(97, 219, 239);
     rect(
       level10Off[i].x,
       level10Off[i].y,
@@ -1015,7 +1011,7 @@ function level10off() {
 
   let level10Off2 = platforms10off2;
   for (let i = 0; i < level10Off2.length; i++) {
-    fill(105, 229, 116);
+    fill(97, 219, 239);
     rect(
       level10Off2[i].x,
       level10Off2[i].y,
@@ -1485,7 +1481,7 @@ function draw() {
     if (
       tempCharacterX1 + 50 > 690 &&
       tempCharacterY1 > 50 &&
-      tempCharacterY1 < 320
+      tempCharacterY1 < 120
     ) {
       state = "level10on";
       player.x = 140;
@@ -1500,7 +1496,7 @@ function draw() {
     if (
       tempCharacterX1 + 50 > 690 &&
       tempCharacterY1 > 50 &&
-      tempCharacterY1 < 320
+      tempCharacterY1 < 120
     ) {
       state = "level10on";
       player.x = 140;
