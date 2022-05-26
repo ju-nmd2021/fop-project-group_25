@@ -10,6 +10,28 @@ let audioJump = new Audio("jump.mp3");
 let audioStar = new Audio("star.mp3");
 let audioDeath = new Audio("death.mp3");
 let audioWin = new Audio("win.mp3");
+let lev1on = "level1on";
+let lev1off = "level1off";
+let lev2on = "level2on";
+let lev2off = "level2off";
+let lev3on = "level3on";
+let lev3off = "level3off";
+let lev4on = "level4on";
+let lev4off = "level4off";
+let lev5on = "level5on";
+let lev5off = "level5off";
+let lev6on = "level6on";
+let lev6off = "level6off";
+let lev7on = "level7on";
+let lev7off = "level7off";
+let lev8on = "level8on";
+let lev8off = "level8off";
+let lev9on = "level9on";
+let lev9off = "level9off";
+let lev10on = "level10on";
+let lev10off = "level10off";
+let lev11on = "level11on";
+let lev11off = "level11off";
 
 // source of the code: https://github.com/processing/p5.js/wiki/Positioning-your-canvas
 function setup() {
