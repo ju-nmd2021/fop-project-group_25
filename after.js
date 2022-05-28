@@ -386,7 +386,7 @@ function drawing(level, color1, color2, color3) {
 }
 
 //visible platforms
-function idc(level, platforms) {
+function visibilityPlatform(level, platforms) {
   if (state === level) {
     platforms.visible = true;
   } else {
@@ -606,29 +606,28 @@ function detectCollision(x, y, object) {
 
 function draw() {
   clear();
-
-  idc(lev1on, platforms1on);
-  idc(lev1off, platforms1off);
-  idc(lev2on, platforms2on);
-  idc(lev2off, platforms2off);
-  idc(lev3on, platforms3on);
-  idc(lev3off, platforms3off);
-  idc(lev4on, platforms4on);
-  idc(lev4off, platforms4off);
-  idc(lev5on, platforms5on);
-  idc(lev5off, platforms5off);
-  idc(lev6on, platforms6on);
-  idc(lev6off, platforms6off);
-  idc(lev7on, platforms7on);
-  idc(lev7off, platforms7off);
-  idc(lev8on, platforms8on);
-  idc(lev8off, platforms8off);
-  idc(lev9on, platforms9on);
-  idc(lev9off, platforms9off);
-  idc(lev10on, platforms10on);
-  idc(lev10off, platforms10off);
-  idc(lev11on, platforms11on);
-  idc(lev11off, platforms11off);
+  visibilityPlatforms(lev1on, platforms1on);
+  visibilityPlatforms(lev1off, platforms1off);
+  visibilityPlatforms(lev2on, platforms2on);
+  visibilityPlatforms(lev2off, platforms2off);
+  visibilityPlatforms(lev3on, platforms3on);
+  visibilityPlatforms(lev3off, platforms3off);
+  visibilityPlatforms(lev4on, platforms4on);
+  visibilityPlatforms(lev4off, platforms4off);
+  visibilityPlatforms(lev5on, platforms5on);
+  visibilityPlatforms(lev5off, platforms5off);
+  visibilityPlatforms(lev6on, platforms6on);
+  visibilityPlatforms(lev6off, platforms6off);
+  visibilityPlatforms(lev7on, platforms7on);
+  visibilityPlatforms(lev7off, platforms7off);
+  visibilityPlatforms(lev8on, platforms8on);
+  visibilityPlatforms(lev8off, platforms8off);
+  visibilityPlatforms(lev9on, platforms9on);
+  visibilityPlatforms(lev9off, platforms9off);
+  visibilityPlatforms(lev10on, platforms10on);
+  visibilityPlatforms(lev10off, platforms10off);
+  visibilityPlatforms(lev11on, platforms11on);
+  visibilityPlatforms(lev11off, platforms11off);
 
   let tempCharacterX1 = player.x;
   let tempCharacterY1 = player.y;
