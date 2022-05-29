@@ -386,7 +386,7 @@ function drawing(level, color1, color2, color3) {
 }
 
 //visible platforms
-function visibilityPlatform(level, platforms) {
+function visibilityPlatforms(level, platforms) {
   if (state === level) {
     platforms.visible = true;
   } else {
