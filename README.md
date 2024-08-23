@@ -1,7 +1,7 @@
 
 ## RGB
 
-RGB is a platform game created as a course project at Jönköping University School of Engineering. The objetive of the game is to collect stars, and progress to next levels.
+RGB is a platform game created as a course project at Jönköping University School of Engineering. The game's objective is to collect stars, and progress to the next levels.
 
 ## Controls
 
@@ -18,4 +18,4 @@ To start the game, open
 ```bash
   index.html
 ```
-file ina web browser, or simply click on the [link] (https://ju-nmd2021.github.io/fop-project-group_25/).
+file in a web browser, or click the [link] (https://ju-nmd2021.github.io/fop-project-group_25/).
