@@ -18,4 +18,4 @@ To start the game, open
 ```bash
   index.html
 ```
-file in a web browser, or click the [link] (https://ju-nmd2021.github.io/fop-project-group_25/).
+file in a web browser, or click the [link](https://ju-nmd2021.github.io/fop-project-group_25/).
